@@ -1,28 +1,10 @@
-\documentclass[12pt,letterpaper]{article}
-
-\usepackage{amsmath} 
-\usepackage{amssymb}
-\usepackage{ulem}
-\usepackage{tikz}
-\usepackage[left=1in,top=1in,right=1in,bottom=1in,nohead]{geometry}
-
-\usepackage{amsthm} 
-\newtheorem{mydef}{Definition}
-\newtheorem{example}{Example}
-\newtheorem{thrm}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{cor}{Corollary}
-\newcommand{\biu}[1]{\underline{\textbf{\textit{#1}}}}
-\newcommand{\so}{\Rightarrow}
-\usepackage[ampersand]{easylist}
-
-\begin{document}
+\include{prelude}
 
 
-Consider two sets $X$ and $Y$ and let us define a relation R (between them) as by $R \subset X \ Y$. For this it is convenient to use the notation $xRy$ which means $(x,y)\in R$
+Consider two sets $X$ and $Y$ and let us define a relation R (between them) by $R \subseteq X \ Y$. For this it is convenient to use the notation $xRy$ which means $(x,y)\in R$
 
 \begin{mydef}
-For a relation $R$ with $X=Y$, we may
+For a relation $R$ with $X=Y$, we may define
 \begin{description}
   	\item[$R_1$] \biu{reflexive} $xRx$ for every $x\in X$
     \item[$R_2$] \biu{symmetric} $x_1Rx_2\so x_2Rx_1 $
@@ -31,14 +13,16 @@ For a relation $R$ with $X=Y$, we may
 \end{mydef}
 
 \begin{example}
+\begin{minipage}{5in}
 \begin{itemize}
 \item $=$ is an equivalence relation (satisfying $R_1$-$R_3$)
 \item $\leq$ on $\mathbb{R}$ is an ordered relation (satisfying $R_1$ and $R_3$
 \end{itemize}
+\end{minipage}
 \end{example}
 
-\begin{mydef} $X$ and $Y$ have the same cardinality if $\exists$ a map $F: X\to Y$ which is 1:1 (injective) and onto (surjective)
-\end{mydef}.
+\begin{mydef} $X$ and $Y$ having the same cardinality if $\exists$ a map $F: X\to Y$ which is 1:1 (injective) and onto (surjective).
+\end{mydef}
 
 Intuitively $X$ and $Y$ have the "same cardinality" means they have the "same size".
 The "same cardinality" relation satisfies $R_1$-$R_3$ is thus an equivalence relation. 
