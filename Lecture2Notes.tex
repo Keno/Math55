@@ -1,0 +1,173 @@
+\include{prelude}
+
+Throughout the following discussions, we will use the following conventions:
+
+\[ \mathbb{N} = \text{the set of natural numbers} = \{1,2,3,\ldots\} \]
+\[ \mathbb{Z} = \text{the set of integers} = \{0,\pm 1, \pm 2, \pm 3, \ldots\} \]
+
+\begin{mydef}
+A set $X\neq \emptyset$ is finite if $card(X)=card\{1,2,\ldots,n\}$ for some $n \in \mathbb{N}$. If so $n$ is unique.
+\end{mydef}
+
+\begin{mydef}
+A set $X\neq \emptyset$ is countable if it is finite or has the same cardinality as $\mathbb{N}$.
+\end{mydef}
+
+\begin{lemma}
+Any subset $X\subset \mathbb{N}, X\neq \emptyset$ is either finite or countably infinite.
+\end{lemma}
+\begin{proof}
+\homework
+\end{proof}
+
+Consider two non-empty sets $X$ and $Y$
+\begin{notation}
+\[\Mor(X,Y) = \text{the set of all maps from } X \text{ to } Y\]
+alt. notation
+\[Y^X= \text{cartesian product of copies of }Y\text{ indexed by }X\]
+ (meaning $Y_{x_1} \times Y_{x_2} \times Y_{x_3} \times \cdots$)
+\end{notation}
+\par
+\begin{minipage}[b]{0.45\textwidth}
+\centering
+\begin{lemma}
+\begin{itemize}
+\item[ ]
+\item $\Mor({0,1},\mathbb{N}) \simeq \mathbb{N} \times \mathbb{N}$ is countable
+\item $\Mor(\mathbb{N},\{0,1\})$ is infinite, but not countable
+\end{itemize}
+
+\begin{proof}
+$\mathbb{N} \times \mathbb{N}$ is the set of integer lattice points in the first quadrant which can be enumerated as shown in the following picture and is therefore countable:
+For b), notice that $\{0,1\}^\mathbb{N}$ is the set of all sequences with values in $\{0,1\}$. Now, suppose that the set was countable. Then $\exists$ sequences $\left(a_n^{(k)}\right)$  of this type indexed by $k\in\mathbb{N}$.
+Now, define $(b_n)$ by $b_n=\begin{cases} 1 &\mbox{if } a_n^{(n)} = 0 \\ 
+0 & \mbox{if }  a_n^{(n)} = 1 \end{cases}$. Clearly $(b_n)$ is distinct from any of the $\left(a_n^{(k)}\right)$ (for it will be distinct in the k-th place.)
+
+\end{proof}
+\end{lemma}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.45\textwidth}
+\vspace{-10cm}
+\begin{tikzpicture}[inner sep=0mm]
+  \clip (-0.5,-0.5) rectangle (5.5,5.5);
+  \draw [step=1,gray] (-1,-1) grid (6,6);
+  \draw [->,very thick] (0,0) -- (0,5);
+  \draw [->,very thick] (0,0) -- (5,0);
+  \draw  node [lattice] at (1,1)(A) {$1$}
+  node[lattice] at (2,1) (B) {$2$}
+  node[lattice] at (1,2) (C) {$3$}
+  node[lattice] at (1,3) (D) {$4$}
+  node[lattice] at (2,2) (E) {$5$}
+  node[lattice] at (3,1) (F) {$6$}
+  node[lattice] at (4,1) (G) {$7$}
+  node[lattice] at (3,2) (H) {$8$}
+  node[lattice] at (2,3) (I) {$9$}
+  node[lattice] at (1,4) (J) {$10$}
+  node[lattice] at (1,5) (K) {$11$}
+  node[lattice] at (2,4) (L) {$12$}
+  node[lattice] at (3,3) (M) {$13$}
+  node[lattice] at (4,2) (N) {$14$}
+  node[lattice] at (5,1) (O) {$15$}
+  node[lattice] at (6,1) (P) {$16$}
+  node[lattice] at (5,2) (Q) {$17$}
+  node[lattice] at (4,3) (R) {$18$}
+  node[lattice] at (3,4) (S) {$19$}
+  node[lattice] at (2,5) (T) {$20$}
+  node[lattice] at (3,5) (U) {$24$}
+  node[lattice] at (4,4) (V) {$25$}
+  node[lattice] at (5,3) (W) {$26$}
+  node[lattice] at (5,4) (X) {$32$} 
+  node[lattice] at (4,5) (Y) {$33$}
+  node[lattice] at (5,5) (Z) {$41$};
+  \path [draw,postaction={on each segment={end arrow=black}},very thick] (A) -- (B) -- (C) -- (D) -- (E) -- (F) -- (G) 
+  -- (H) -- (I) -- (J) -- (K) -- (L) -- (M) -- (N) -- (O) -- (P) -- (Q) -- (R) -- (S) 
+  		 -- (T) -- (1,6)  (2,6) --  (U) -- (V) -- (W) -- (6,2) (6,3) -- (X)	-- (Y) -- (3,6) (4,6) -- (Z) -- (6,4);
+\end{tikzpicture}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{cor}
+\begin{enumerate}[start=0]
+\item The power set of $\mathbb{N}$, i.e. the set of all subsets of $\mathbb{N}$ is not countable.
+\begin{proof}
+We may uniquely associate each subset $S$ with an equivalent sequence $(a_n)$ whose elements are given $a_n=\begin{cases} 0 &\mbox{if } n\not\in S \\ 1 & \mbox{if }  n \in S \end{cases}$. Then by part b) of the previous lemma, the power set of $\mathbb{N}$ is not countable.
+\end{proof}
+\item $\mathbb{N}^k$ for $k\in\mathbb{N}$ is countable
+\begin{proof}
+We will prove this assertion by induction. We have proven in part a) of the lemma that $\mathbb{N^2}$ and $\mathbb{N}$ is countable by definition proving the base case of $\mathbb{N}^{k+1}\simeq\mathbb{N}^k\times \mathbb{N}$ for $k=1$. Now, for the inductive step, since $\mathbb{N}^k$ is countable, we may apply the same algorithm as in part a) of the lemma (spreading out the elements of $\mathbb{N}^k$ on the x axis - this is valid, because there is an injective map between $\mathbb{N}^k$ and $\mathbb{N}$ by the inductive hypothesis).
+\end{proof}
+\item Any countable union of countable sets is countable
+\begin{proof}
+We may suppose that the union is disjoint, for if it were not we could construct a disjoint union by removing the intersection prior to performing the union. Note that this can be done in constructive way. Now, since by definition of countability, must have the same cardinality as (possibly a a subset) of $\mathbb{N}$ and thus there must exist a bijective map between the resulting and a subset of $\mathbb{N}^k$ (i.e. the union has the same cardinality as a subset of $\mathbb{N}^k$). Now, since any subset of a countable set is countable and since $\mathbb{N}^k$ is countable, the resulting union must be countable.
+\end{proof}
+\item $\mathbb{Q}_{\geq 0} = \{\frac{k}{l} | k\in \mathbb{N}\cup\{0\}, l\in\N\}$ is countable and so is $\Q$
+\begin{proof}
+Notice that there is a trivial bijective map between $\mathbb{Q}_{\geq 0}$ and $(\N\cup\{0\})\times\N$ which is countable by 2). Thus $\mathbb{Q}_{\geq 0}$ must be countable. Similarly, there exists a trivial bijective map between $\mathbb{Q}_{<0}$ and $\N\times\N$. Taking $\mathbb{Q}_{\geq 0}\cup\mathbb{Q}_{<0}=\Q$ and $\Q$ is therefore countable by 2).
+\end{proof}
+\item The set of real numbers $\R$ is not countable
+\begin{proof}
+\homework
+\end{proof}
+\item The of algebraic numbers (i.e $x\in \mathbb{C}$ that satisfy a non-trivial polynomial equations with rational coefficients is countable. In particular the set of real algebraic numbers countable.
+\begin{proof}
+Notice that all possible rational polynomials of degree k are of the form $\Q^k$ which is countable by Corollary 1). Now, for each of these polynomial there is at most k roots, so the set of all possible roots of a polynomial of degree $k$ is countable. Taking the union of all $k$, we obtain the countable set of all algebraic numbers (it is countable by Corollary 2) ). 
+\end{proof}
+\item There exist transcendental (non-algebraic) numbers - and in particular there exist irrational numbers
+\begin{proof}
+We know that the set of all real algebraic numbers is countable. However, the set of reals is not and therefore there must exists unvountably infinite numbers in $\R$ that are non-algebraic.
+\end{proof}
+\item $\R^k$, $k\in\N$ has the same cardinality as $\R$ 
+\begin{proof}
+\homework
+\end{proof}
+\end{enumerate}
+\end{cor}
+\section*{Metric Spaces}
+\begin{mydef}
+A metric space is a pair (X,d) of a set $X$ and a function $d: X\times X\to\R_{\geq 0}$ such that $\forall x,y,z \in X$
+\begin{enumerate}
+\item[a)] $d(x,y) = 0 \Leftrightarrow y=x$
+\item[b)] $d(x,y) = d(y,x)$
+\item[c)] $d(x,z) \leq d(x,y) + d(y,z)$
+\end{enumerate}
+$d$ is an ultrametric if it satisfies
+\begin{enumerate}
+\item[c')] $d(x,z) \leq \max(d(x,y),d(y,z))$
+\end{enumerate}
+\biu{Note:} $c')\so c)$
+\end{mydef}
+\begin{example}
+\begin{enumerate}[start=0]
+\item Let $(X,d)$ be a metric space. If $Y\subset X$, then $(Y,d|_Y)$ is a metric space.
+\item $\Q,\R,\mathbb{C}$ with $d(x,y)=|y-x|$ are metric spaces
+\item Any non-empty set with metric $d(x,y)=\begin{cases} 0 &\mbox{if } x=y \\ 1 & \mbox{if }  x\neq y \end{cases}$ is a metric space (in fact, it's an ultrametric space, though not a very interesting one topologically)
+\item $\Q^k,\R^k,\C^k$, $d(x,y)=\sqrt{\sum|x_i-y_i|^2}$ (also called the "euclidean metric") are metric spaces
+\item $S^n=\{x\in\R^{n+1}|\sum x_i^2=1\}$ (n-sphere) with a restricted euclidean metric
+\item Let $p$ be a prime number. Given any $x\in\Q,x\neq0$. we can express it uniquely as $x=\epsilon \frac{k}{l} p^n$, $\epsilon\in\{\pm 1\}$, $k,l$ are relatively prime in $\N$ and $n\in\Z$. Define $v_p(x)=n$. Note that $v_p(xy)=v_p(x)+v_p(y)$, $v_p(x+y)\geq \min(v_p(x),v_p(y)$. Define $||x||_p=p^{-v_p(x)}$ (this is the "p-adic absolute value"). $d_p(x,y)=\begin{cases} 0 &\mbox{if } x=y \\ ||x||_p & \mbox{if }  x\neq y \end{cases}$. Then $d_p(x,y)\leq\max(d_p(x,z),d_p(z,y))$ (this follows from the fact that $||x+y||_p\leq\max(||x||_p,||y||_p)$) and thus this metric is an (interesting) ultrametric.
+\end{enumerate}
+\end{example}
+Suppose $(X,d)$ is a metric space and $(x_n)_{n\geq 1}$ is a sequence in $X$. Furthermore suppose that there exists an element $x_\infty\in X$.
+\begin{mydef}
+The sequence $(x_n)$ converges to $x_\infty$ - notation $\lim\limits_{n\to\infty} x_n = x_\infty$ or $x_n\to x_\infty$ - if for each $\epsilon\in\R,\epsilon>0$, there exists $N$ such that $n\geq\N\so d(x_n,x_\infty)<\epsilon$. The sequence converges if there exists some $x_\infty\in X$ that satisfies $x_n\to x_\infty$
+\end{mydef}
+\begin{rem}
+\begin{itemize}
+\item[i)] We could have taken only $\epsilon\in\Q,\epsilon>0$, by the denseness of $\Q$ in $\R$
+\item[ii)] Suppose $c>0$ is fixed in the following discussion. If for every $\epsilon>0$, there exists some $N$ s.t. $n\geq\N\so d(x_n,x_\infty)\leq C\epsilon$ then $X_n\to X\infty$.
+\item[iii)] The $x_infty$ id unique.
+\begin{proof}
+Suppose $x_n\to x_\infty$, $x_n\to \tilde{x_\infty}$, $d(x_\infty,\tilde{x_\infty}\neq0$, Take $\epsilon=\frac{1}{2}d(x_\infty,\tilde{x_\infty})>0$. By def. there must exist $N_1$ s.t. $n\geq N_1\so d(x_n,x_\infty)<\epsilon$ and simlilarly, there must exist $N_2$ s.t. $n\geq N_2\so d(x_n,\tilde{x_\infty})<\epsilon$. Clearly both are also true for $N=\max(N_1,N_2)$. Now for some $n>N$ we may must have $d(x_\infty,\tilde{x_\infty})\leq d(x_n,x_\infty) + d(x_n,\tilde{x_\infty}) < 2\epsilon=d(x_\infty,\tilde{x_\infty})$ which is a contradiction.
+\end{proof}
+\end{itemize}
+\end{rem}.
+\begin{example}
+Consider the metric space given by $(\Q,d_p)$ and a sequence $(s_n)$ therein whose elements are given by $s_n=\sum\limits_{k=0}^{n-1} p^k=1+p+p^2+\cdots+p^{n-1}=\frac{1-p^n}{1-p}$ (the last part is true by the binomial theorem. Now,
+\[ d_p\left(s_n,\dfrac{1}{1-p}\right)=\pabs{s_n-\dfrac{1}{1-p}}]=\pabs{p^n}\pabs{\dfrac{1}{1-p}} \]
+The last equality is true since $v_p(xy) = v_p(x)+v_p(y)$ and $p^{-v_p(xy)}=p^{-(v_p(x)+v_p(y))}=p^{-v_p(x)}p^{-v_p(y)}$.
+Note however that $\pabs{p^n}=p^-n$ which goes to zero as $n\to\infty$ and that $\pabs{\frac{1}{1-p}}$ is a costant in $n$ so
+\[ \lim\limits_{n\to\infty} d_p\left(s_n,\dfrac{1}{1-p}\right) = \lim\limits_{n\to\infty} p^{-n}\pabs{\dfrac{1}{1-p}} = 0 \]
+\end{example}
+\biu{Conclusion:} In this metric space $\sum p^n\to\frac{1}{1-p}$
+\end{document}
