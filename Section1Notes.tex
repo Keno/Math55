@@ -1,0 +1,32 @@
+\include{prelude}
+
+\begin{lemma}
+\biu{Zorn's Lemma} Suppose a partially ordered set $P$ has the property that every totally ordered subset has an upper bound in $P$. Then the set $P$ contains at least one maximal element.
+\section{Problems}
+\begin{itemize}
+\item Prove that if $A$ is an infinite set, then $A$ and $A\times \N$ have the same cardinality.
+\begin{proof}
+We know from previous exercise that there exists a bijective map $\Phi: \N\to\N\times\N$. Define
+\[ F = \{ f_0 | f_0:X\to X\times\N, X\subseteq A, f_0 \text{is a bijection}\}\]
+Now note that since $A$ is infinite, there must exist $S\subset A$ s.t. $\exists\; g:S\xrightarrow{\text{bij.}}\N$. 
+Furthermore note that that if there exists a bijective map  $\Omega: A\to B$, then there exists a bijective map $\Omega^*:A\times C\to B\times C$ given by 
+$\Omega^*(x,c)=(\Omega(x),c)$. Given this information we can see that the map $g^{-1}\Phi g$ must be a bijective map from $S$ to $S\times \N$ and thus  $g^{-1}\Phi g\in F$ so $F$ is nonempty.
+
+We can now go on to define a partial ordering on $F$ as follows: If $f$ is an extension of $g$, then $f>g$. Note that that this ordering on $F$ satisfies Zorn's lemma as the domain of any map in $F$ is bounded by $A$.
+
+We may therefore choose a maximal element in $F$. Let  $f*: B\to B\times \N$ be that element. Now there are two cases
+\begin{enumerate}
+\item A-B is finite\par
+Note that $B$ is infinite and thus there must be a copy of $\N$ in $B$ and we may write $B$ as $B_1\cup \N$.
+We now find find a bijective map $f: B\to A$ as follows. For values in $B_1$ we have have $f(b)=b$ and for values in $\N$ we have $f: \N\to (A-B)\cup\N$, which can be easily found since $A-B$ is finite and can thus be just prepended to $\N$. Note that $f$ is bijective.
+
+We may now define a bijective map $h: A\to A\times \N$ as $f^{-1}f^*f$
+ ($A\xrightarrow{f^{-1}}B\xrightarrow{f^*}B\times\N\xrightarrow{f}A\times\N$)
+
+\end{enumerate}
+
+\end{proof}
+\end{itemize}
+\end{lemma}
+
+\end{document}

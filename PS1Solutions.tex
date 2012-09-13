@@ -1,0 +1,69 @@
+\title{Math 55: Problem Set 1}
+\include{prelude}
+\maketitle
+\begin{lemma}
+Any map from $F: A\to B$ where $A$ and $B$ are countable sets is injective if there exists an ordering $(a_n)$ in $A$ for which $F(a_n)$ is strictly increasing. 
+\begin{proof} (by contradiction)
+Assume that there exists an element $b\in B$ such that $F(a)=b$ and $f(a')=b$, but $a\neq b$. Since $f$ must be strictly increasing, we must either have $f(a')>f(a)$ or $f(a')<f(a)$, so we have a contradiction.
+\end{proof}
+\end{lemma}
+\biu{Problems:}
+\begin{itemize}
+\item In lecture, we gave an informal description of a particular bijective map $F: \N \to \N\times \N$. Write out an explicit ormula for a map of this type, or for the inverse of such a map. Show that your map has the
+required properties.
+\begin{proof}
+We will construct a bijective map $G: \N\times\N\to\N$. Rather than using alternating diagonals we will use simple diagonals (every diagonal starts on the $(1,n)$ and goes to $(n,1)$. We can easily write such a map as
+\[ G(x,y) = \dfrac{(x+y-2)(x+y-1)}{2}+x \]
+To prove that $G$ is injective, we will prove that it is strictly increasing when going along the path of the straight diagonals that define this map and must thus be $1:1$ (since such a path covers all pairs $(x,y)$ and since the map is strictly increasing, there may be no other pair $(x',y')$ that maps to the same number under $G$). First note that on the  $n$-th diagonal $x+y=n+1$ for all points on the diagonal. Therefore $\dfrac{(x+y-2)(x+y-1)}{2}$ is constant on the diagonal. Furthermore since we defined a diagonal to go from $1$ to $n$ on the x axis, x is stricly increasing and thus $G$ must be strictly increasing along one diagonal. The last remaining case is the boundary from one diagonal to the other. We will consider the difference between the last element $x_{n,n}$ of the $n$-th diagonal (i.e  $(n,1)$ and the first element $x_{n+1,1}$ of the $(n+1)$-st diagonal (i.e. $(1,n+1)$ ). Clearly we have
+\[ x_{n,n} = G(n,1) = \dfrac{n(n-1)}{2} + n = n^2 + \dfrac{n}{2} \]
+\[ x_{n+1,1} = G(1,n+1) = \dfrac{n(n+1)}{2} + n = n^2 + \dfrac{3n}{2} \]
+Now clearly
+\[ n^2 + \dfrac{n}{2} < n^2 + \dfrac{3n}{2} \forall n \]
+and thus $G$ must be strictly increasing (for values along the diagonals) and is therefore injective.\par
+We will prove that $G$ is surjective by induction. Namely we will prove that if there exists a tuple $(x,y)$ in $\N\times\N$ that maps to $n$ under $G$, then there must exist a tuple $(x',y')$ in $\N\times\N$ that maps to $n+1=G(x,y)+1$ under $G$. For the base case note that $G(1,1)=1$. For the inductive step, consider any tuple $(x,y)$ in $\N\times\N$. Now there are two cases: 
+\begin{enumerate}
+\item $y\neq 1$: In this case we set $(x',y')=(x+1,y-1)$. Now $G(x',y')-G(x,y)=1$ as desired (since $\dfrac{(x+y-2)(x+y-1)}{2}$ remains constant along the diagonal). 
+\item $y==n$. This this case we have $(x',y')=(1,x+y)$ (i.e. we're moving to the next diagonal). Now
+\[ G(x',y')-G(x,y) = \dfrac{2(x+y-1)}{2} - x + 1 = x - x +1 = 1 \]
+as desired. Thus $G$ is both injective and surjective (i.e. it's bijective). \par
+\biu{Note:} Even though this problem was done for straight diagonals rather than alternating diagonals, one could of course also construct a straight diagonal map with diagonals from $(n,1)$, $(n,1)$, which will lead to a bijective map by a similar argument and then one could write the bijective map over alternating diagonals as a union over those two maps for even and odd $n$ respectively. 
+\end{enumerate}
+\end{proof}
+\item Let $S$ be a non-empty, infinite, - i.e. not finite - subset of $\N$. Prove that $S$ has the same cardinality as $\N$.
+\begin{proof}
+To prove that $S$ has the same cardinality as $N$ we will find a bijective map from $F: S\to \N$ as follows. Pick the lowest element $s$ in $S$ and the lowest element $n$ in $\N$ and define $F(s)=n$. Repeat the same with the next-lowest element in $S$ and the next-lowest element in $\N$. Now note the $F$ is strictly increasing and must thus be injective. Furthermore, we will prove that $F$ is surjective by contradiction. Assume that there is a $n \in \N$ for which there is no $s \in S$ s.t $F(s) = n$. However, since $S$ is infinite we may repeat the algorithm for the construction of $F$ any number of times and by repeating the algorithm $n$ times we find just such an $s$ (namely the $n$-lowest element in $S$) and we have a contradiction as desired. Now, since $F: S\to \N$ is a bijective map, $S$ and $\N$ must have the same cardinality. 
+\end{proof}
+\item Let n be an integer strictly greater than one. Construct a surjective map from $\Mor(\N,\{1,2,3,\ldots,n)$ to the set of non-negative real numbers. Either show that your map is also injective, or analyze the degree to
+which it fails to be injective. Deduce that $\R^k$, for $k\geq 1$, has the
+same cardinality as the power set of $\N$, i.e., the same cardinality as
+$\Mor(\N,{0,1})$. Hint: if $R$ has the same cardinality as $Mor(\N,\{0, 1\})$, $\R^k$ has the same cardinality as what?
+\begin{lemma}
+Before beginning the proof let us establish the following lemma: The union between a non-countable set $B$  and a countably infinite set $A$ has the same cardinality as the non-countable set. We have proven this result for the case where the countably infinite set is $\N$ in section.  Now, by definition, we may label the elements of $A$ as $a_1,a_2,\ldots$. Furthermore we will choose any element $b_0$ in $B$ and construct a map $f: A\cup B\to B\times\N\simeq B$ as follows
+\[ f(a_n)=(b_0,n+1)\]
+\[ f(b) = (b,1) \]
+Note that f is injective. Furthermore note that the identity map from $B$ to $A\cup B$ is also an injective map and therefore by the9 Schr\"oder-Bernstein theorem, $B$ and $A\cup B$ must have the same cardinality. 
+
+\end{lemma}
+\begin{proof}
+
+Since $\Mor(\N,\{1,2,3,\ldots,n\})$ is the set of all sequences with values in $\{1,2,3,\ldots,n\}$, we may construct the any real number $a$ between $0$ and $1$ identified by the sequence $(a_n)$ as $a=\lim\limits_{i\to\infty}\sum\limits_i \dfrac{a_i -1}{n^i}$, where every $a_i$ is chosen such that for all $i$ $\sum\limits_i \dfrac{a_i -1}{n^i} \leq a < \sum\limits_i \dfrac{a_i}{n^i}$. Note that any $a\in [0,1)$ can be expressed this way by the denseness of $\Q$ in $\R$. To prove that a sequence constructed in this way does indeed converge to $a$, let $\epsilon>0$, then by choosing $k>N=1-\log_n\epsilon$, we find that
+\[ a-\sum\limits_{i=1}^k \frac{a_1-1}{n^i}<\frac{1}{n^{k-1}}<\epsilon\] 
+and thus $(a_n)$ must converge to $a$. We have thus found a surjective map from $\Theta: \Mor(\N,{1,2,\ldots,n})\to[0,1)$. 
+Now notice that there exists a bijective map $G$ between $\R+$ and $\N\times [0,1)$ obtained given by 
+$G(x)=(\lfloor x \rfloor+1,x-\lfloor x \rfloor)$. Furthermore, there must exist a surjective map 
+$\Omega:\N\times\Mor(\N,{1,2,\ldots,n})\to\N\times [0,1)$ given by
+
+ $\Omega(n,x...)=(n,\Theta(x...))$ and as proven in section, there must exist a bijective map 
+ $\Phi: \Mor(\N,{1,2,\ldots,n})\to\N\times\Mor(\N,{1,2,\ldots,n})$. 
+ We may now define our final surjective map $H: \Mor(\N,{1,2,\ldots,n})\to\R^+$ by $H=\Phi\circ\Omega\circ G^{-1}$.
+ 
+Unfortunately, the map $\Theta$ we found is not completly injective. Concretely, for of values of $a\in\Q$ for which the set of prime factorizations of the denominator of $a$ is a strict subset of the prime factorizations of $n$, there exist two separate sequences in $\Mor(\N,\{1,2,3,\ldots,n\})$. Let us call the set of all such $a$, $K$ and let us the set of all sequences in $\Mor(\N,\{1,2,3,\ldots,n\})$ that map to $L$. Restricting the domain of $\Theta$ to elements not in $L$ gives a bijective map to $\R\backslash K$ . 
+Notice that both $K$ and $L$ are countable and since the union of a non-countable set and a countably infinite set has the same cardinality as the infinite set itself, $\Mor(\N,\{1,2,3,\ldots,n\})$ must have the same cardinality as $\R$.
+
+Having established this, it is easy to show that $\R^k$ has the same cardinality as $\R$. Specifically, we have established a bijective map between $\R$ and (by taking n=2) $\Mor(\N,\{1,2\})$. $\R^k$ must therefore have the same cardinality as $(\Mor(\N,\{1,2\}))^k\simeq \Mor(\N,\{1,2,\ldots,2k\})$. However, since we have established that any set $\Mor(\N,\{1,2,3,\ldots,n\})$ must have the same cardinality as $\R$, $\R^k$, must have the same cardinality as $\R$
+ \end{proof}
+
+
+\end{itemize}
+
+\end{document}
