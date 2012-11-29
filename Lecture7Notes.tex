@@ -1,0 +1,41 @@
+\include{prelude}
+\begin{term}
+A complex polynomial is a formal expression of $\sum\limits_{k=0}^N a_kx^k, a_0, \ldots, a_N \in \C$.
+\end{term}
+Suppose $P(x)\in \C[x] =_{def}$ ring of complex polynomials. Then for any $z\in \C$, we can make sense of $p(z)\in \C$. Now $z\to p(z)$ is a polynomial function.
+\begin{obs}
+$z\to p(z)$ is a continuous function from $\C\simeq \R^2$ to $\C$. Also $z\to |z|$ is a continous map from $\C$ to $\R$. Then $|p(z)|$ is continuous.
+\end{obs}
+\begin{term}
+One calls $p(x)-\sum_{k=1}^n a_k x^k$ constant if $a_k=0$ for $k>0$. \par Furthermore one calls $p(x)$ monic if $a_N=1$
+\end{term}
+\begin{thrm}[Fundamental Theorem of algebra]
+Every non-constant polynomial $p(x)$ has a complex root.
+\begin{proof}
+In proving the FTA, we may and shall suppose without loss of generality
+\begin{enumerate}
+\item $p(x)$ is monic
+\item The degree is at least $2$. 
+\end{enumerate}
+\begin{lemma}
+For every $C>0$, there exists $R>0$ such that $|z|\geq R \so |p(z)| \geq C$
+\begin{proof}
+We may suppose that $R\geq 1$. Then for $|z|\geq R$, $|p(z)|\geq |z|^N - \left| \sum\limits_{k=0}^{N-1} a_k z^k \right|$ by the triangle inequality. However this must be $\geq |z|^N - \sum\limits{k=0}^{N-1} |a_k||z|^k \geq |z|^N - A|z|^{N-1}$, where $A=\sum\limits_{k=0}^{N-1} |a_k|$. Now make $R\geq \max(1,2A)$. Thus we have 
+\[ = (|z|-A)|z|^{N-1} \geq \frac{1}{2} |z|^N \geq \frac{1}{2}R^N\]. So we need $R\geq \max(1,2A,(2C)^{\frac{1}{N}}$.
+\end{proof}
+\end{lemma}
+\begin{cor}
+There exists $z_0\in \C$ such that $|p(z)|\geq |p(z_0)|$ for all $z\in \C$. 
+\begin{proof}To see this, choose $C=|p(0)|$. Then with $R$ as in the Lemma, $\{z\in \C | |z|<R\}$ is compact. Thus there must exist $z_0$ such that $|z_0|\leq R \so |p(z)|\geq |p(z_0)|$. Since   the set is compact, we may find an $z_0$ such that $|p(z_0)|$ forms a lower bound of $|p(z)|$ where z in the above compact set.\par 
+On the other hand, $|z|>R\so |p(z)|\geq|p(0)|\geq |p(z_0)|$ since $0$ is in the above set.
+\end{proof}
+\end{cor}
+Now, if the FTA were to fail, there would exist $p$ as above s.t. $p(z_0) \neq 0$ - if not replace $p$ by by $q(x) = p(x+z_0) = \sum_{k=0}^N a_k(x+z_0)^k$. Note that the sum can be expanded by the binomial theorem. \par 
+Then $p(z_0) = a_0 \neq 0$. Replace $p(x)$ by $\frac{1}{a_0}p(x)$. Then $p$ is no longer monic, but otherwise has the same properties plus $p(0) = a_0 = 1$. Thus we have $p(z) = 1+\sum_{k=1}^N a_k z^k$. Choose $m$, $1\leq m \leq N$ such that $a_1=\ldots=a_{m-1}=0$, $a_m\neq 0$. \par
+Then $p(z) = 1 + a_mz^m + \sum_{k=m+1}^N a_k z^k$. To arrive at the desired contradiction, we shall now construct some $z$ such that $p(z)<p(0)=1$.\par 
+We shall only consider values of $z=re^{i\theta}$, $0<r<1$, so that $a_mz^m \in R_{<0}$. We can do this by fixing $\theta$ such that $m\theta + \text{arg} a_m = \pi$. Then, for such $z$,
+\[ |p(z)| = | 1-|a_m|r^m + \sum\limits_{k=m+1}^N |a_k| r^k| \leq 1-|a_m|r^m + \sum\limits_{k=m+1}^N |a_k| r^k \leq 1-|a_m|r^m + Ar^{m+1} = 1 - (a_m - Ar)r^m \] 
+Provided $r\leq (a)$l
+\end{proof}
+\end{thrm}
+\end{document}

@@ -1,0 +1,67 @@
+\title{Math 55: Problem Set 2}
+\include{prelude}
+\maketitle
+Principal Collaborator: Mark Arildsen \par
+Other collaborators: Connor Harris, Abel Corver, David Fan, Mark Yao, Jonathan Ward
+\section*{Problem 1}
+\begin{proof}
+Given the least upper bound axiom of $\R$ (Every non-empty subset $S$ of $R$ has a least upper bound; In other words $\sup S$ exists and is a real number) we will prove that $\R$ is complete in the sense that ever Cauchy sequence in $\R$ converges.\par
+Let $(a_n)$ be any Cauchy sequence in $\R$. Furthermore let 
+\[ (b_n) = \inf\{a_m|m\geq n\} \]
+Now $(b_n)$ is a monotonically increasing Cauchy sequence. Now, note that since $(b_n)$ is bounded, there must exist $b=\sup b_n$. Now, for any $\epsilon>0$, there must exist $b_M$ s.t. $b - \frac{\epsilon}{2} < b_M \leq b$  (for otherwise $b-\frac{\epsilon}{2}$ would be an upper bound of $(b_n)$ with $b-\frac{\epsilon}{2}<b$. Furthermore, since $(b_n)$ is Cauchy, there must exist some $N_1$ such that $N_1$ s.t. $m,n\geq N_1 \so |b_n-b_m|<\frac{\epsilon}{2}$. Therefore for all $n\geq N=\max \{N_1,M\}$, $|b_n-b|<\epsilon$ and therefore $\limn b_n = b = \sup b_n$.
+Now let $ (c_n) = \sup\{ a_m| m \geq n\}$. By the same argument $c=\limn c_n$ converges. 
+Now we will prove by contradiction that $\limn c_n = \limn b_n$. For such a purpose assume that $b\neq c$. Now note that there must be infinite $a_i<b$ and infinite $a_j>c$. Furthermore note that $b<c$. Therefore if $\epsilon = c-b \neq 0$, there may not exist a finite $N$ s.t. for $n,m > N \so |a_n-a_m|<\epsilon$ which would imply that $a$ is not Cauchy. Therefore we must have $b=c$. Furthermore, we have $b_n\leq a_n \leq c_n$ for all $n$ by construction. Since we have proved $\limn b_n = \limn c_n$, $\limn a_n$ must exist with $\limn b_n = \limn a_n = \limn c_n$ by the squeeze theorem.
+\end{proof} 
+\begin{proof}
+Given that every Cauchy sequence in $\R$ converges, we will prove that there must exist a least upper bound for every $s\subset R$.
+Let $S\subset \R$ be any subset of $\R$ that is bounded above. If $S$ has a maximal element then let $\sup S =  \max S$ and we are done. We will from hereon assume that $S$ has no such maximal element. Now, let $A=\{x\in R| x>s \forall s\in S\}$.
+Now, we will prove by contradiction that $A$ is closed. For that purpose, assume that $A$ is not closed. Then we may construct a convergent Cauchy sequence $(a_n)$ in $A$ that does not converge in $A$ (in particular the limit must be less than any element of $A$). Let $l = \limn a_n$ and consider the following three cases:
+\begin{enumerate}
+\item $l>s \forall s\in S$. In this case $l$ would be an upper bound of $S$ not in $A$ which contradicts the construction of $A$.
+\item $l\in S$. Now since $S$ does not have a maximal element, there must exist some $s\in S$ s.t. $l<s$. Let $\epsilon=s-l$. Now, by the definition of limit there must be some $(a_n)\in (l,l+\epsilon)$. However, such an $a_n\in A$ would be less than $s\in S$, contradicting the construction of $A$.
+\item $l\notin S$, but $\exists s\in S$ s.t. $l<s$. In this case we may proceed the same way as in the second case and prove that there must exist $a_n\in A < s\in S$ contradiction the construction of $A$.
+\end{enumerate}
+Now, since $A$ is a closed subset of $A$ that is contiguous and not bounded above, it must have a minimal element, i.e. there must $a\in A$ in a such that there is no upper bound of $S$ greater than $a$ and thus $a$ must be the least upper bound.
+%Now, choose arbitrary $x_1\in S$ and $x_2 \in A$. Let
+%\[ x_n = x_{n-2}+(x_{n-1}-x_{n-2}) 2^{-m_n} \]
+%where we choose $m_n$ s.t. $x_n \in \R-A$ if $n$ is odd and $x_n \in A$ if $n$ is even (Note that such an %$m_n$ always exists, because we may choose it so large that we can get arbitrarily close to $x_{n-2}$ (which is in the right set).
+%Now note that we must always have $x_{n-2} < x_n < x_{n-1}$ and thus $(x_n)$ must be a Cauchy sequence and must thus converge to some $x\in \R$.  Clearly $x$ is an upper bound of $S$. Furthermore note that there may not exists any $a\in A$ ($A$ is the set of upper bounds) s.t.  $a<x$. And therefore $x$ must be the LUB.
+\end{proof}
+\section*{Problem 2}
+\begin{lemma} $F^{-1}(Y) = X$
+\begin{proof}
+Since the domain of $F$ is all of $X$ and the image of $F$ is a subset of $Y$, the inverse image of $Y$ needs to be the domain of $F$ (which is $X$).
+\end{proof}
+\end{lemma}
+We will first prove that b) implies a):
+\begin{proof}
+For any open set $U\subset Y$, the complement $Y-U=S\subset Y$ is closed and thus the inverse image $F^{-1}(Y-U)$ is closed. We may write $F^{-1}(Y-U) = F^{-1}(Y)-F^{-1}(U)=X-F^{-1}(U)$. Note that the first equality for the elements that map to $Y-U$ and $Y$ are mutually exclusive (since one element in $X$ must always map to exactly one element in $Y$)w and in fact complements of each other. Now, the complement of the closed set $X-F^{-1}(U)$ is just $F^{-1}(U)$ which must therefore be open.
+\end{proof}
+Now we will probe that a) implies c)
+\begin{proof}
+Let $x_0\in X$ and let $\epsilon>0$. Then the open ball $B(F(x_0),\epsilon)\subset Y$ of radius $\epsilon$ centered at $x_0$ is an open set and thus its inverse image under $F$ in $Y$,  $F(B(F(x_0),\epsilon))$ must also be an open set. Thus by the definition of the open set, there must exist a ball $B(x_0,\delta) \subset B(F(x_0),\epsilon)$ and thus we have found the required $\delta$.
+\end{proof}
+And c) implies d)
+\begin{proof}
+Let $\{x_k\}$ be any convergent sequence in $X$ and let $x=\limk x_k$. Let $\epsilon>0$, then, by (c) we can find $\delta$ that $d(x_n,x)<\delta$for $n>N$, where $N$ is chosen such that $d(x_n,x)<\delta$, which must exist since $\limk x_k$ converges,  implies $d(F(x_n),F(x)) < \epsilon$. Therefore $\{
+F(x_k)\}$ converges to $F(x)$ or, more specifically $\limk F(x_k) = F(\limk x_k)$. 
+\end{proof} 
+And finally d) implies b):
+\begin{proof}
+Recall that a set $B \subset X$ is closed if and only if it contains the limit of every sequence that converges in $X$ with elements in $B$. 
+Let $S$ be any closed subset of $Y$ and let $\{F^{-1}(x_k)\}$ be any convergent sequence in the inverse image of $S$ ($F^{-1}(S)$). Now by d), we know that the $\{x_k\}$ which is the image sequence of $\{F^{-1}(x_k)\}$ must also converge and since it is convergent sequence in the closed set $S$, it must converge to some $x\in S$. Furthermore, also by d), $\{F^{-1}(x_k)\}$ must converge to $\{F^{-1}(x)\}\in F^{-1}(S)$ and therefore $F^{-1}(S)$ is closed.
+\end{proof}
+\section*{Problem 3}
+Let $F_n$ be the $n$-th set used in the construction of the cantor set as used in Simmons p.67. 
+\subsection*{a)}
+Note that on the $n$ iteration. There are $2^{n-1}$ open intervals removed from $F_{n-1}$ to form $F_n$. Furthermore, each of these intervals has a length of $\frac{1}{3^n}$. To find the total length of all the removed intervals (i.e. those open intervals that make up U), we may simply add them up:
+\[ \sum\limits_{n=1}^\infty \dfrac{2^{n-1}}{3^n} = \sum\limits_{n=0}^\infty \dfrac{2^{n}}{3^{n+1}} = \dfrac{1}{3}\sum\limits_{n=0}^\infty \left(\dfrac{2}{3}\right)^n \]
+which is a simple convergent geometric series that can be easily solved:
+ \[ \dfrac{1}{3}\sum\limits_{n=0}^\infty \left(\dfrac{2}{3}\right)^n = \dfrac{1}{3} \dfrac{1}{1-\frac{2}{3}} = 1 \]
+ Thus the total length of the all $I_k$ is $1$.
+ \subsection*{b)}
+Let $P$ be any partition of $[0,1]$ such that $\mesh(P)=\delta>0$. Then note that any Riemann sum of the characteristic function $S_{\chi_{F_n}}$ is bounded below by 0 and above by $\frac{1}{2} \left(\frac{2}{3}\right)^n + 2^n\delta$ (the sum of length of closed set in the cantor set plus an additional $2\delta$ which may be caused by intervals of length $\delta$ at the end of the closed intervals that the Cantor set is composed of). Now note that we must always have $0\leq S_{\chi_F} \leq S_{\chi_{F_n}} \leq \frac{1}{2} \left( \frac{2}{3}\right)^n + 2^n\delta$ for all $n$. Now let $\delta=\frac{1}{3^n}$. Then $0\leq S_{\chi(F)} \leq S_{\chi_{F_n}} \leq \left(\frac{2}{3}\right)^n$. Now note that $\chi_{U}=1-\chi_{F}$ and also that $S_{\chi_{F}}=1-S_{\chi_U} $ and we therefore also have $1\geq S_{\chi_U} \geq 1- S_{\chi_{F_n}} \geq 1 - \left(\frac{2}{3}\right)^n$\par
+Let $\epsilon>0$. Now, since $\limn \left(\frac{2}{3}\right)^n = 0$ we can always find $n$ (and thus $\delta$) such that $1-S_{\chi_{U}}\leq \left(\frac{2}{3}\right)^n < \epsilon$ (note that the first inequality is just repeated from above). And since $0\leq\chi_{U}\leq 1$, this is equivalent to the statement that, for any $\epsilon>0$, we may also find $\delta$ such that $|S_{\chi_{U}}-1| <\epsilon$. And thus (since $S$ is any Riemann sum of $\chi_U$ associated with any partition $P$ with $\mesh(P)>\delta$), $\chi_U$ is Riemann integrable and $R\int_0^1 \chi_{F} = 1$. 
+
+
+\end{document}

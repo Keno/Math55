@@ -1,0 +1,234 @@
+\title{Math 55: Problem Set 3}
+\include{prelude}
+\maketitle
+Recall the definition of the p-adic absolute value from lecture 2. Namely
+\begin{mydef}
+ Let $p$ be a prime number. Given any $x\in\Q,x\neq0$. we can express it uniquely as $x=\epsilon \frac{k}{l} p^n$, $\epsilon\in\{\pm 1\}$, $k,l$ are relatively prime in $\N$ and $n\in\Z$. Define $v_p(x)=n$. Note that $v_p(xy)=v_p(x)+v_p(y)$, $v_p(x+y)\geq \min(v_p(x),v_p(y)$. Define $||x||_p=p^{-v_p(x)}$ (this is the "p-adic absolute value"). $d_p(x,y)=\begin{cases} 0 &\mbox{if } x=y \\ ||x-y||_p & \mbox{if }  x\neq y \end{cases}$. 
+\end{mydef}
+Now let $(\Q,d_p)$ be a metric space and let $(\Q_p,\bar{d_p})$ be its unique completion. In particular $\Q_p$ is the set of limits (with respect to the p-adic absolute value) of sequences in $\Q_p$ and we may thus associate $x\in Q_p$ with some sequence $(x_n) \in Q$.
+
+\section*{Problem 1a}
+\biu{Note:} All of the following proofs will be given by proving that the algebraic operations can be applied elementwise to the representative Cauchy sequences in $\Q$ and that the resulting sequence will once again be a Cauchy Sequence in $\Q$. That this is a valid method for $x,y\in \Q$ can be easily seen by considering the constant sequence. An alternate, but equivalent (an in fact almost identical in wording) way to proof such an extension, would be to assume that the algebraic operations are well defined and proving that applying the operation elementwise  will converge to said number. 
+
+\par 
+We will define the extension of the algebraic operations on $\Q$ to $\Q_p$ by applying the operations element by element and then considering the limit of the newly found sequence. \par
+\biu{Addition:} Let $x,y\in \Q_p$ and let $(x_n), (y_n)$ be two Cauchy sequences in $\Q$ representing $x$ and $y$ respectively. We will show that $(x_n+y_n)$ converges. Let $\epsilon>0$. Then we may find $N_1, N_2$, such that $n,m \geq N_1 \so ||x_n - x_m||_p < \epsilon$ and $n,m \geq N_2 \so ||y_n - y_m||_p < \epsilon$. Clearly the same must hold true for $n,m>N=\max(N_1,N_2)$ . Then for $n,m>N ||(x_n + y_n) - (x_m + y_m)||_p \leq \max\{ ||x_n - x_m||_p, ||y_n - y_m||_p \} < \epsilon$ by the ultrametric inequality. Therefore $(x_n+y_n)$ converges and we may define $x+y=_{def}\lim (x_n+y_n) \in \Q_p$ \par
+\begin{lemma}
+For, $x,y \in \Q$, $\pabs{x+y}=\max(\pabs{x_n},\pabs{x_m})$ if $\pabs{x_n} \neq \pabs{x_m}$
+\begin{proof}
+Let $x,y \in \Q$, then $x$ and $y$ can be expressed as $x=\epsilon_1\frac{a}{b}p^n$ and $y=\epsilon_2\frac{c}{d}p^m$ for some $\epsilon_1,\epsilon_2\in \{0,1\}$, $a,b,c,d \in \N$, $a,b$ coprime, $c,d$ coprime and $a,b,c,d$ coprime with $p$. 
+Now
+\[x+y = \epsilon_1\frac{a}{b}p^n + \epsilon_2\frac{c}{d}p^m\]
+\[ =\dfrac{\epsilon_1 a d p^n + \epsilon_2 c b p^m}{bd} \]
+Now without loss of generality assume that $n>m$, then 
+\[ = p^n\dfrac{\epsilon_1 a d + \epsilon_2 c b p^{m-n}}{bd} \]
+Now if $m=n$ it is possible that $\dfrac{\epsilon_1 a d + \epsilon_2 c b p^{m-n}}{bd}$ add up to a multiple of $p$. However, if $m\neq n$ (i.e. $\pabs{x}\neq\pabs{y}$), that can never be the case: Without loss of generality assume that $m>n$,  then consider $\epsilon_1 a d + \epsilon_2 c b p^{m-n} \mod{p}$ (clearly we would have to be able to make this 0 if it were to ever add up to a multiple of $p$. However, since $m>n$,
+$0\equiv \epsilon_2 c b p^{m-n} \mod{p}$ and since p is coprime with all factors of $\epsilon_1 a d$, $0\not\equiv \epsilon_1 a d \mod{p}$. Therefore $\dfrac{\epsilon_1 a d p^n + \epsilon_2 c b p^m}{bd}$ is coprime with $p$ and $\pabs{x+y}=p^{-m}$. By symmetry with the case $n<m$, we get 
+$\pabs{x+y}=\max(p^{-m},p^{-n})=\max(\pabs{x},\pabs{y})$
+\end{proof}
+\end{lemma}
+\begin{lemma}
+If $(x_n)$, $x_n\in \Q$ is a Cauchy sequence, then $\pabs{x_n}$ is bounded. 
+\begin{proof}
+Let $(x_n)$ be any Cauchy sequence in $\Q$. We will prove that it is bounded by contradiction. Assume that it is not. Then, for all $B$, there exists $n$ such that $\pabs{x_n}>B$. In fact, there must exist infinite $n$ that that satisfy the above property (otherwise one could find the maximal of such $x_n$ and would that have that $\pabs{x_n}$ is bounded.
+
+Now, for any $B$ the set $\{ x_i \in (x_n) | \pabs{x_i} > B \}$ is infinite and it will also be infinite if we remove a finite number of elements from the above set we will still have an infinite set of such indices. 
+
+Now, for any $\epsilon>0$, choose arbitrary $B>0$, and we may choose $N$ such that $\pabs{x_n-x_m}<\epsilon$. Furthermore we may find $m>N$ s.t. $\pabs{x_m}>B$ (since we assume $\pabs{x_n}$ is not bounded). Now, there must either exists $n\geq N$, s.t. $\pabs{x_n}\neq\pabs{x_m}$, or we must have $\pabs{x_n}=\pabs{x_N}=\pabs{x_{N+1}}=\ldots$. \par 
+In the first case we must have $\pabs{x_n+x_m} = \max(\pabs{x_n},\pabs{x_m})>B$ by the above lemma, but this contradicts our assumption that $(x_n)$ is Cauchy. In the second case we have $\max_n(\pabs{x_n})=\max(\pabs{x_1},\pabs{x_2},\pabs{x_3}, \ldots, \pabs{N})$ which would imply we have an upper bound for $x_n$. \biu{Contradiction}. Therefore $\pabs{x_n}$ must be bounded. 
+\end{proof}
+\end{lemma}
+\begin{lemma} $\pabs{xy} = \pabs{x}\pabs{y}$
+\begin{proof}
+\[ \pabs{xy} = p^{-v_p(xy)} = p^{-v_p(x)-v_p(y)} = \pabs{x}\pabs{y} \]
+\end{proof}
+\end{lemma}
+\biu{Multiplication:} Let $x,y\in \Q_p$ and let $(x_n), (y_n)$ be two Cauchy sequences in $\Q$ representing $x$ and $y$ respectively. Note that by the above lemma, there must exist $M_x, M_y$ such that $\pabs{x_n}\leq M_x$ and $\pabs{y_n}\leq M_y$. We will show that $(x_ny_n)$ converges. Let $\epsilon>0$. Then we may find $N_1, N_2$, such that $n,m \geq N_1 \so ||x_n - x_m||_p < \frac{\epsilon}{M_y}$ and $n,m \geq N_2 \so ||y_n - y_m||_p < \frac{\epsilon}{M_x}$. Clearly the same must hold true for $n,m>N=\max(N_1,N_2)$ . Now let $\Delta_x = x_m-x_n$ and let $\Delta_y = y_m-y_n$. Note that $||\Delta_x||_p, ||\Delta_y||_p < \epsilon $ by construction. Then for $n,m>N$ 
+\[\pabs{x_ny_n - x_my_m} = \pabs{x_ny_n - (x_n +\Delta_x)(y_n+\Delta_y)} = \pabs{x_n\Delta_y + y_n\Delta_x + \Delta_x\Delta_y}  \] \[
+\leq \max(\pabs{x_n\Delta_y}, \pabs{y_n\Delta_x}, \pabs{\Delta_x\Delta_y}) = \max(\pabs{x_n}\pabs{\Delta_y}, \pabs{y_n}\pabs{\Delta_x}, \pabs{\Delta_x}\pabs{\Delta_y})  \]
+\[ 
+< \max\left(M_x\frac{\epsilon}{M_x},M_y\frac{\epsilon}{M_y},\frac{\epsilon^2}{M_yM_x}\right)
+ \]
+ Note that we may assume that $\epsilon<1$, for if we will be able to find $N$ such that the limit assertion holds for $\epsilon_0<1$, it will also hold for $\epsilon>1>\epsilon_0$. Furthermore we may assume $M_y,M_x>1$ Therefore, we may say that
+ \[ \max\left(\epsilon,\epsilon,\frac{\epsilon^2}{M_yM_x}\right) = \epsilon \]
+and thus $(x_ny_n)$ converges and we may define $xy=_{def}\limn (x_ny_n)$
+\par\biu{Negative}
+Let $x\in \Q_p$. Note that taking the negative is equivalent to the multiplication $(-1)(x)$ which is an element of $\Q_p$ by the above proof (One could also proof the convergence of $(-x_n)$ and reach the same result).
+\par\biu{Reciprocal}
+Let us first prove the following lemma:
+\begin{lemma}
+Let $(x_n)$ be a Cauchy sequence converging to $x\neq0$ (with $x_n\neq 0$ for all $n$).  Then $\pabs{x_n}$ must have a lower bound. 
+\begin{proof}
+Since $(x_n)$ does not converge to 0, there may only be finitely many $n$ for which $\pabs{x_n-0} \leq \epsilon$. Therefore, we may find a minimal element of that set of elements and that minimal element must be a lower bound of $(\pabs{x_n})$.
+\end{proof} 
+\end{lemma}
+Let $x\in \Q_p$, $x\neq 0$ and let $(x_n)$ be a Cauchy sequence in $\Q$ representing it. We will prove that $(1/x_n)$  converges.
+\[ \pabs{\frac{1}{x_n}-\frac{1}{x_m}} = \pabs{\frac{x_n-x_m}{x_nx_m}} = \dfrac{\pabs{x_n-x_m}}{\pabs{x_nx_m}} \] Now note that there must be a lower limit for $\pabs{x_n}$ and $\pabs{x_m}$. Let us call that lower bound $m$. Furthermore, since $(x_n)$ is Cauchy, we can find $N$ such that  $\pabs{x_n-x_m}<\epsilon m^2$. And thus 
+\[ \dfrac{\pabs{x_n-x_m}}{\pabs{x_nx_m}} \leq \frac{m^2\epsilon}{m^2}  = \epsilon \]
+
+ and thus $(1/x_n)$ converges in $\Q_p$ and we may define $\frac{1}{x}=_{def} \limn \frac{1}{x_n}$
+\par\biu{p-adic absolute value} 
+Let $x\in \Q_p$ and let $(x_n)$ be a sequence representing it. 
+Then we can find $N$ such that $n,m>N$ implies $\pabs{x_n-x_m}<\epsilon$. Now, we consider two cases:
+\begin{enumerate}
+\item $\pabs{x_m} \neq \pabs{x_n}$
+	By one of the above lemmas, $\pabs{x_n-x_m}=\max(\pabs{x_n},\pabs{x_m}) < \epsilon$. Thus $x_n, x_m < \epsilon$ and we must have $|\pabs{x_n}-\pabs{x_m}|<\epsilon$.
+\item $\pabs{x_m} = \pabs{x}$
+Now $|\pabs{x_m} - \pabs{x_n}| = 0$ which is certainly less than any $\epsilon$.
+
+\end{enumerate}
+Thus $\pabs{x_m}$ (a sequence of numbers in $\R$ converges and we may define $\pabs{x}=_{def} \limn \pabs{x_n}$.
+\section*{Problem 1b}
+We need to proof the following for all $x,y,z\in \Q_p$:\par
+\biu{A1} $x+(y+z) = (x+y)+z$
+\par\biu{A2} $x+y=y+x$
+\par\biu{A3} $x+0=x$
+\par\biu{A4} For each $x$ there exists an element $-a$ such that $a+(-a) = 0$.
+\par\biu{M1} $x(yz) = (xy)z$
+\par\biu{M2} $xy = yx$
+\par\biu{M3} $x\cdot 1 = x$
+\par\biu{M4} For each $x\neq 0$, there is an element $x^{-1}$ such that $xx^{-1}=1$
+\par\biu{DL} $a(b+c) = ab + ac$
+\par In these proofs we will move freely between $x\in \Q_p$ and the series representation $(x_n)$. Furthermore we will makes use of the limit theorems and the fact that properties A1-DL hold for elements of $\Q$. Note in particular the following that for a sequence for elements $(x+y)_n$ of a sequence representing $(x+y)$, $(x+y)_n = x_n+y_n$ by the above definition of $+$ on $\Q_p$ and similarly $(xy)_n = x_ny_n$. Furthermore note that any number in $\Q$ can be just represented by a constant sequence of that number (e.g. $(0,0,0,\ldots)$ or $(1,1,1,\ldots)$)
+\begin{proof}\biu{A1}
+$x+(y+z) = \limn \left(x_n + (y+z)_n\right) = \limn (x_n + y_n + z_n) =\limn \left((x+y)_n + z_n\right) = (x+y)+z$
+\end{proof}
+\begin{proof}\biu{M1}
+$x(yz) = \limn x_n(yz)_n = \limn x_ny_nz_n = \limn (xy)_nz_n = (xy)z$
+\end{proof}
+\begin{proof}\biu{A2}
+$(x+y) = \limn (x+y)_n = \limn (x_n + y_n) =  \limn (y_n + x_n) =  \limn (y+x)_n = (y+x)$
+\end{proof}
+\begin{proof}\biu{M2}
+$(xy) = \limn (xy)_n = \limn (x_ny_n) =  \limn (y_nx_n) =  \limn (yx)_n = (yx)$
+\end{proof}
+\begin{proof}\biu{A3}
+$(x+0) = \limn (x+0)_n = \limn (x_n+0) =  \limn (x_n) = x$
+\end{proof}
+\begin{proof}\biu{M3}
+$(x\cdot 1) = \limn (x\cdot 1)_n = \limn (x_n\cdot 1) =  \limn (x_n) = x$
+\end{proof}
+\begin{proof}\biu{A4}
+Let $(-x)$ be the negative element found in problem 1a. Then,
+\[x+(-x) = \limn (x_n + (-x)_n) = \limn (x_n + (-1)(x_n)) = \limn 0 = 0 \]
+\end{proof}
+\begin{proof}\biu{M4}
+Let $x^{-1}=\frac{1}{x}$ be the reciprocal element found in problem 1a. Then,
+\[xx^{-1} = \limn (x_n(x^{-1})_n) = \limn \frac{x_n}{x_n} = \limn 1 = 1 \]
+\end{proof}
+\begin{proof}\biu{DL}
+$ x(y+z) = \limn x_n(y+z)_n = \limn x_n(y_n+z_n) = \limn (x_ny_n + x_nz_n) = \limn x_ny_n + \limn x_nz_n = xy + xz$
+\end{proof}
+\section*{Problem 1c}
+First note that we must have 
+\[ n \equiv \sum\limits_{i=0}^{k-1} a_i p^i \mod{p^k} \]
+Now, since $n$ is a finite integer, we must have $n<p^N$ for some $N$. Note that
+\[ n \equiv \sum\limits_{i=0}^{N-1} a_i p^i \mod{p^N} \Leftrightarrow n = \sum\limits_{i=0}^{N-1} a_i p^i  \]
+.We will now construct $a_i$. Consider the case of $k=1$ (for which we construct $a_0$):
+\[ n \equiv a_0 \mod{k}\]
+So let $a_0 = n \mod{k}$. \par For $k=j$,
+\[ n \equiv \sum\limits_{i=0}^{j-1} a_i p_i \mod{p^i} \]
+\[ \Leftrightarrow  n \equiv a_{j-1}p^{j-1}\sum\limits_{i=0}^{j-2} a_i p_i \mod{p^j} \]
+However note that 
+\[ 0 \equiv n- \sum\limits_{i=0}^{j-2} a_i p_i \mod{p^{j-1}} \]
+So 
+\[\dfrac{n- \sum\limits_{i=0}^{j-2} a_i p_i }{p^{j-1}} \mod{p^j} \] is an element of $s_p$
+Now, 
+\[ \dfrac{n- \sum\limits_{i=0}^{j-2} a_i p_i }{p^{j-1}} p^{j-1}\equiv a_{j-1}p^{j-1} \mod{p^j}  \]
+So let 
+\[a_{j} = \dfrac{n- \sum\limits_{i=0}^{j-1} a_i p_i }{p^{j}} \mod{p^{j+1}} \]
+To show that such a representation is unique, assume that $\sum _{i=0}^N a_ip^i = a = \sum _{i=0}^N a_i'p^i$, but that $a_i\neq a'_i$ for some i.
+Now
+\[ \sum _{i=0}^N a_ip^i  - \sum _{i=0}^N a_i'p^i = a-a = 0 \]
+Note that for any $n$, the $n-th$ partial sum is less than $p^n$ (since $a_i, a'_i \in S_p$). Therefore the $N$-th partial sum must be less than $p^N$ and we must have $a_N=a'_N$. By induction we see that $a_i = a'_i$ for all $i$.
+\section*{Problem 1d}
+\begin{lemma}
+In lecture two we proved that in a p-adic metric space  $\sum p^n\to\frac{1}{1-p}$. The proof is restated here for convenience. 
+\begin{proof}
+Consider a sequence $(s_n)$ in $(\Q,d_p)$ whose elements are given by $s_n=\sum\limits_{k=0}^{n-1} p^k=1+p+p^2+\cdots+p^{n-1}=\frac{1-p^n}{1-p}$ (the last part is true by the binomial theorem). Now,
+\[ d_p\left(s_n,\dfrac{1}{1-p}\right)=\pabs{s_n-\dfrac{1}{1-p}}=\pabs{\dfrac{-p^n}{1-p}}=\pabs{p^n}\pabs{\dfrac{1}{1-p}} \]
+Note however that $\pabs{p^n}=p^{-n}$ which goes to zero as $n\to\infty$ and that $\pabs{\frac{1}{1-p}}$ is a costant in $n$ so
+\[ \lim\limits_{n\to\infty} d_p\left(s_n,\dfrac{1}{1-p}\right) = \lim\limits_{n\to\infty} p^{-n}\pabs{\dfrac{1}{1-p}} = 0 \]
+\end{proof}
+\end{lemma}
+\begin{proof}
+Let each $a_i = p-1$. Then
+\[ \sum_{k=0}^\infty (p-1)p^k = (p-1) \sum_{k=0}^\infty p^k = \frac{p-1}{1-p} = -1 \]
+\end{proof}
+\section*{Problem 1e}
+We will employ a very similar method of construction to the one used in 1c. First note that 
+\[ n \equiv \sum\limits_{i=0}^{k-1} a_i p^i \mod{p^k} \]
+must still hold for all $k$. In particular let us again start with $a_0$. We must have
+\[ \frac{1}{n} \equiv a_0 \mod{p} \]
+In this equation we will take $\frac{1}{n}$ (which is an integer in $S_p$ to denote the multiplicative inverse of $n \mod{p}$ in $\mod{p}$. Note that such a multiplicative inverse exists because $p$ is prime. Also note that we may still use our earlier definition of 
+\[a_{j} = \dfrac{\frac{1}{n} - \sum\limits_{i=0}^{j-1} a_i p_i }{p^{j}} \mod{p^{j+1}} \]
+as $n$ and $p^{j+1}$ are coprime and thus the multiplicative inverse $\frac{1}{n} \mod{p^{j+1}}$ must exist and be an integer less than $p^{j+1}$.
+Now note that the partial sum $S_n$ is given by
+\[ S_j = S_{n-1} + \frac{1}{n} - S_{n-1} \mod{p^{j+1}} = \frac{1}{n} \mod{p^{j+1}} \]
+Notice that this means that 
+\[S_j - \frac{1}{n} \equiv 0 \mod{p^{j+1}} \] 
+Thus $S_j - \frac{1}{n}$ must be a multiple of $p^{j+1}$ and the p-adic absolute value of that $p^{-(j+1)}$ will go to 0 as $j\to\infty$
+\section*{Problem 1f}
+Note that the problem is trivially true when $q$ is not coprime with $p$. We will there fore consider $q$ coprime with $p$. First note that our prove above, namely that $\frac{1}{n}$ can be represented by an infinite sum can be easily extended to $\frac{m}{n}$ where, $m,n,p$ are coprime. Thus any number in $\Q$ can be represented as either a finite or infinite series of the desired form starting at $n=0$ (since $v_p(q) = 0$ in this case as we have already considered the case where q includes a power of $p$).  \par
+Now, let $q\in \Q_p$. Then we can find a Cauchy sequence $(q_n)$ in $\Q$ representing it. Since $q_n \in \Q$ every $q_n$ has a series expansion of the desired from. Now that the $p$-adic absolute value of that for is just $p^{-N}$, where $N$ is the index of the first non-zero $a_j$ (The corresponding $p^j$ is a common factor in all following terms, but the sum of the terms (sans $p^j$) must be coprime with $p^j$). \par
+Now, for any $\epsilon$, we can find $N$ such that $n,m>N$ implies 
+\[ \pabs{q_n-q_m} \leq \epsilon \]
+In particular letting $\epsilon = p^k$. We can find series expansion $q_n=\sum_i a_ip^i$, $q_m=\sum_i b_ip^i$ such that the first $k$ terms of each sequence are equal. We can now construct a third sequence $(c_i)$ such that the first $k$ terms of that sequence match the first k terms in $(a_i)$ and $(b_i)$.
+We will now prove that that sum actually converges to desired $q$. Let $\epsilon>0$ and choose $k$ such that $p^-k \leq \epsilon$ and choose $n$ such that $\pabs{q_n - q}\leq\epsilon$.
+ \[\pabs{\sum_{i\leq k} c_ip^i - q} = \pabs{\sum_{i\leq k} c_ip^i - q_n +- q_n  - q}\leq \max(\frac{1}{p^{-k}},\epsilon) = \epsilon \]
+ as desired. \par 
+ We will now go on to prove that such series can be added: 
+Let $\sum_i a_ip^i$ and $\sum_i b_ip^i$. Note that simple addition yields just another sequence when applying this simple algorithm that should be very familiar from normal decimal addition. For $\sum_i c_ip^i = \sum_i a_ip^i + \sum_i b_ip^i$
+\[ c_0 = a_0+b_0 \mod{p} \]
+\[ c_i = a_i + b_i + \left\lfloor\frac{a_i+b_i}{p}\right\rfloor \mod{p} \]
+To prove that this is in fact the same notion of addition as defined in 1 a), let the partial sums be the sequence in $\Q$ converging to $a+b$,$a$,$b$ respectively. $S^c_n = S^b_n + S^a_n$ for all $n$ and thus the sequence obtained by adding the partial sum sequences is just the element of a sequence converging to $a+b$. \par 
+We will now turn our attention to multiplication. If $S_p$, were closed (which it isn't), we could simply 
+\[ c_n = \sum_{k=0}^n a_kb_{k-n} \]
+Now, to make sure that $c_n$ stays in $S_p$, we will define, will have to write $c_n=d_n+x p$ where $x$ ``carries over'' to $c_{n+1}$. However, note that we need not have $x<p$, so we will define the term that defines such a notion:
+\[ x_n = \left\lfloor \dfrac{\sum_{i=0}^{n-1} d_n}{p^n} \right\rfloor \]
+This gives us our final equation
+\[ d_n = c_n + x_n \mod{p} \]
+To prove that this is also equivalent to the multiplication we defined in 1), we again consider partial sum. Note that , by definition, we must have $S^d_n = (S^a_n)(s^b_n)$. And thus this is again equivalent to definition the multiplication as elementwise multiplication of a sequence that converges towards $a$ and $b$ respectively. \par
+Finally, will prove that every series of the desired form represents a number in $Q_p$. Assume that there exists a sequence of the desired form, but that such a sequence does not represent (read does not converge to) any number in $\Q$. Let $S_n$ be the partial sums of any such sequence. Clearly, we must have $|S_n-S_m|\leq \max(p^-n,p^-m)$ both of which can be made arbitrarily small. Now $S_n$ is a Cauchy sequence that does not converge in $\Q_p$ contradiction the completeness of $\Q_p$. \par 
+To show that such a series representation is unique, assume that there exists two series representations with coefficients $a_i$ and $b_i$ that both represent $a$. Clearly if some $a_i\neq b_i$ for some $i$, then $\pabs{S^a_n - S^b_n} = \frac{1}{p^i}$ for all $n>i$. However, that would imply that $a_i$ and $b_i$ do not converge to the same value and thus we must have $a_i=b_i$ for all $i$ and thus the series expansion must be unique. 
+
+\section*{Problem 1g}
+Let $(x_n)$ be any sequence of elements in $\Z$. Now note that since all $x_n$ are integers, $\pabs{x_n} \leq 1$. Thus, since $Z$ is closed under addition, for any  $n\in \N$ we may find finitely many balls of radius $\frac{1}{p^n}$ that cover $\Z$ (and $\Z_p$ by extension). Thus $\Z_p$ is totally bounded. Now, since $\Z_p$ is a totally bounded, closed (by definition of $\Z_p$) subset of a complete space, $\Z_p$ must be compact. \par 
+$\Z_p$ is also open. Let $x_0\in \Z_p$ $\epsilon>0$. Now we may find $n$ such that $\frac{1}{p^n}\leq \epsilon$. Now, $B(x_0, \frac{1}{p^n})$ Is clearly non-empty as $x_0+p^n$ must lie in that ball.
+
+$\Q_p$ is neither compact nor countable. Suppose $\Q_p$ was countable, then since one can find indexed sequences $x^i_n$ in $\Q$ that converge to $x_i\in \Q_p$. Now let 
+\[ y_i = x^i_i + 1 \mod{p} \]
+Clearly $y_i$ is distinct from any $x_i$, but $y_i$ is also in $\Q_p$, thus $\Q_p$ cannot be countable. \par
+Now note that once can always find two elements in $\Q_p$ that are arbitrarily far apart and thus $\Q_p$ cannot be totally bounded and by theorem proven in lecture it is therefore not compact.
+\section*{Problem 2}
+\begin{proof}
+Let $d$ be a distance function on all sequences in $[0,1]$ given by $d(\{x_k\},\{y_k\})=\sup_k |x_k-y_k|$. 
+We need to verify that
+\begin{enumerate}
+\item $d(x,y)=0\Leftrightarrow y=x$
+\begin{proof}
+We will say $\{x_k\}=\{y_k\} \Leftrightarrow x_k = y_k$ for all $k$. Furthermore, we have $d(\{x_k\},\{y_k\}) = 0 \myiff \sup_k |x_k-y_k| = 0 \myiff |x_k-y_k| = 0 \forall k \iff x_k = y_k \forall k$
+\end{proof}
+\item $d(x,y) = d(y,x)$
+\begin{proof}
+\[ d(x,y) = d(y,x) \myiff \sup_k |x_k-y_k| = \sup_k |x_k-y_k| \]
+Now, since $|x-y|=|y-x|$, for all $x,y$, $\{|x_k-y_k|, k\in \N\}=\{|y_k-x_k|, k\in \N\}$ and thus 
+\[ \sup_k |x_k-y_k| = \sup_k |x_k-y_k| \]
+as desired
+\end{proof}
+\item $d(x,y) \leq d(x,z) + d(z,y)$
+\begin{proof}
+\[ d(x,y) \leq d(x,z) + d(z,y) \iff \sup_k |x_k-y_k| < \sup_k |x_k-z_k|  + \sup_k |z_k-y_k| \]
+However, note that by the triangle inequality  $|x_k-y_k| < |x_k-z_k|  + |z_k-y_k|$ for all $k$ and thus we must have $\sup_k |x_k-y_k| < \sup_k |x_k-z_k|  + \sup_k |z_k-y_k|$ as desired. 
+Let $\{x_k\},\{y_k\}$ be any element of $X$. Now note that since $x_k,y_k \in [0,1]$, we must have $|x_k-y_k|\leq 1 < 2$ for all $k$. Therefore $d(\{x_k\},\{y_k\}) < 2$. And thus $X$ is bounded.  \par
+\end{proof}
+\end{enumerate}
+We will prove that $X$ is not totally bounded by contradiction. Assume therefore that $X$ is totally bounded. 
+Let $\epsilon = \frac{1}{10}$. Then there must exists a set of $k$ sequences $\{ (x^{(1)}_n), (x^{(2)}_n), (x^{(3)}_n), ..., (x^{(k)}_n) \}$ such that 
+\[ \bigcup_{1\leq i \leq k} B(\{x^{(i)}_n\},\frac{1}{10}) \supset X \]
+Now let 
+\[ y_{1\leq i \leq n} = \begin{cases} x_i^{(i)}+\frac{1}{10} &\mbox{if } =x_1^{(i)} \leq \frac{9}{10}\\ 
+x_i^{(i)} - \frac{1}{10} & \mbox{otherwise }  \end{cases}\]
+and let every other element of $y_k$ be an arbitrary element of $[0,1]$. Now note that every element of $\{y_k\}$ is in $[0,1]$ and thus $\{y_k\}\in X$. However, also note that $d(y_k, x_k^{(i)}) \geq \frac{1}{10}$ for $1\leq i \leq n$, since $|y_k-x_k^{(k)}| \geq \frac{1}{10}$ and thus $\sup |y_k-x_k^{(k)}| \geq \frac{1}{10}$. Thus $\{y_k\} \in X$, but $\{y_k\}$ is not in any of the finite balls we constructed that cover $X$. Therefore we have a \biu{Contradiction}. $X$ cannot be totally bounded. 
+\end{proof}
+\end{document}

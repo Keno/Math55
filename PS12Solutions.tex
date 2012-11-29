@@ -1,0 +1,126 @@
+\title{Math 55: Penultimate assignment}
+\include{prelude}
+\maketitle
+\section*{Problem 1a)}
+We have 
+\[ \log x = \sum_{n\geq 0} a_n (x-1)^n \]
+\[ e^x = \sum_{n\geq 0} b_n x^n \]
+Now consider
+\[ e^{\log(x+1)} = \sum_{i\geq 0} b_i \left( \sum_{k > 0} a_k x^k \right)^n  = 1+x \]
+So we must have $b_0=1$. Now, for the scope of this proof only, let $[x^j]$ denote the coefficient of $x^j$ in the expansion of $ e^{\log x+1} $. Now, consider
+\[ \left( \sum_{k > 0} a_k x^k \mod x^m \right)^n = \sum_{k_1+k_2+\cdots+k_m=n} { n\choose {k_1,k_2,\ldots,k_m}  } \prod_{1\leq t \leq m} (a_t)^{k_t} x^{tk_t} \]
+Note however, that $\prod_{1\leq t \leq m} (a_t)^{k_t} x^{tk_t}$ will always give of with minimum power $x^n$, so we may write,
+\[ 0=[x^m] = \sum_{n=0}^m b_n \sum_{A_n} \prod_{1\leq t \leq m} (a_t)^{k_t} \]
+Where $A_n$ is a set of $m-tuples$ of elements in $\N\cup\{0\}$ such that:
+\[ A_n = \{ (k_1,\ldots,k_m) | \sum_{i=0}^m k_i = n, \sum_{i=0}^m i k_i = m \} \]
+Note that each this set is well defined and does not depend on the axiom of choice since the set which we are restricting is finite. Now note that the only such tuple involving $a_m$ is given when $n=1$, so we have
+\[ a_m = -\frac{1}{b_1} \sum_{n=0}^m b_n \sum_{A'_n} \prod_{1\leq t \leq m} (a_t)^{k_t}\]
+Where $A'_n = A_n$ when $n\neq 1$ and $A'_1 = A_1 \ \{(0,\cdots,0,1) \}$ 
+\section*{Problem 1b)}
+Let K be a field and let V be a finite dimensional dimensional vector space over $K$. 
+\subsection*{If}
+Let $T\in End(V)$ be a linear transformation with characteristic polynomial $p_{char}=(X-1)^n$. By the Cayley-Hamilton theorem, we must have $(T-1)^n=0$ and thus $(T-1)$ is nilpotent and $T$ is unipotent.
+\subsection*{Only If}
+\begin{lemma}
+Let $T\in End(V)$ be unipotent. Then, for every $T$-invariant subspace of $V$, there exists at least one vector $v$ such that $(T-1)v=0$
+\begin{proof}
+Let $W$, be a $T$-invariant subspace of $V$, let $w$ be any vector in $W$ and let $m\geq 0$ be the index of nilpotency of $(T-1)$. Then $0=(T-1)^m w=(T-1) (T-1)^{m-1}  w$, so let $v= (T-1)^{m-1}$.
+\end{proof}
+\end{lemma}
+Since $V$ is $T$-invariant, there must at least exist one generalized eigenvalue, which may form the generalized eigenspace $V_1$. Now, assume that $\dim V_1 \leq \dim V$. Then, by theorem proven in class there exists a T-invariant subspace $U\subset V$ such that $V=V_1\oplus U$. However, since $U$ is $T$-invariant, it must contain at least one non-zero vector that is also in $V_1$, which cannot be and thus we must have $\dim V_1 = \dim V$.
+\begin{comment}
+\begin{lemma}
+\begin{lemma}
+Let $L$ be any extension field of $K$. There does not exist any $a\in L$ s.t. $a\neq 0$, but $Tv=av$, for some $0\neq v\in V$ (where $V$ is seen as a subspace of a vector space $V_L$ over $L$ ). 
+\begin{proof}
+Since $T$ is unipotent, we must have $(T-1)^k=0$ for some $k$. The same must hold true when considering $T\in \End(V) \subset \End(V_L)$. Now assume that there did exist such an $a\neq 1$. Then for some $v\in V$, $T^n v = a^n v$. Therefore we must have $a=0$.
+\end{proof}
+\end{lemma}
+\begin{lemma}
+Any nilpotent linear transformation must have characteristic polynomial $X^n$
+\begin{proof}
+We know that the characteristic polynomial must be monic polynmial of degree $n=\dim V$ (as proven in class) and furthermore, we know that we may uniquely factor in into finitely many (since $\dim V \leq \infty$) irreducible polynomials of degree $\leq n$. Any eigenvalue in $K$ will correspond to a factor of $(X)$ so the only such factor is $(X-1)$, therefore
+\[ p_char(X) = (X-1)^k q(X) \]
+for some $0\leq k \leq n$, where $q$ is a polynomial that has no root over $K$. Assume that $q(X)\neq 1$. Then there exist finitely many irreducible factors $q_n(X)$ that also do not have a  root over $k$. 
+Now, consider any of the $q_n(X)$ and consider the field $L=K[X]/q_n(X)$ as finite extension field of dimension $\dim q_n(X)$ as in a previous problem set. Now, clearly $p_char$ has a non-zero root over this extension field (given by $q_n(X)$)
+\end{proof}
+\end{lemma}
+\end{comment}
+\section*{Problem 1c)}
+For nilpotent/unipotent $T$ with index of nilpotency/unipotency $m$, let 
+\[ e^T = \sum_{n=0}^{m-1} \frac{T^n}{n!} \]
+\[ \log T = \sum_{n=1}^{m-1} \frac{(-1)^{n+1}}{n} (T-1)^n \]
+These satisfy the relation found in 1a) and thus also satisfy the functional relation we require. Note that both are well defined since the field is characteristic $0$ and thus none of the coefficients are equal to $0$.
+\section*{Problem 1d)}
+To prove that $e^T$ is a bijection is suffices to show that $T\to e^T$ and $T\to \log T$ are both injective (since we have already shown that they are inverses of each other in 1c) ). Now, do do so, let $T\in \End(V)$ be nilpotent. Then clearly
+\[ (e^T - 1)^k = (\sum_{n=1}^{m-1} \frac{T^n}{n!} + 1 - 1) = \left(\sum_{n=1}^m \frac{T^n}{n!}\right)^k \]
+is nilpotent, since $T$ is. \par
+Conversely assume that $T$ is unipotent. Then
+\[ (\log T)^k = (\sum_{n=1}^m \frac{1}{n} (T-1)^n)^k \]
+which is nilpotent by definition. The existence of an inverse guarantees injectiveness and thus we are done.
+\section*{Problem 1e)}
+We can easily relax the condition in statements $c)$ and $d)$ to fields of characteristic $\geq \dim V$ without any adjustment to the proof.
+\section*{Problem 2}
+Define $T_S$ as in the original Version D of the Jordan Canonical Form and define
+\[ T_U = TT_S^{-1} = T_S^{-1}(T_N+T_S) = T_S^{-1}T_N + 1 \]
+(Note that $T_S$ is invertible since it has non-zero determinant).
+Now,i) is true by the original theorem. \par
+For ii), note that
+\[ (T_U-1)^n = \left(T_S^{-1}\right)^nT_N^n\]
+And thus $T_U$ is unipotent with index of unipotency $\leq$ than the index of nilpotency of $T_N$. \par
+For iii), first note that $T$ and $T_S^{-1}$ commute. Since the $V_{\lambda_j}$ are T-invariant, it suffices to show this on each of the $V_{\lambda_j}$. We have $T_S^{-1}|_{V_{\lambda_j}} = \lambda_j^{-n_j} I$, which necessarily commutes with any linear transformation on that subspace.
+Thus 
+\[ T_UT_S = TT_S^{-1}T_S = T \]
+\[ T_ST_U = T_STT_S^{-1} = T_ST_S^{-1}T = T \]
+which proves iii).
+For iv), we will use the same lemma as in class and make use of the fact that $T_S^{-1}|_{V_{\lambda_j}} = \lambda_j^{-n_j} I$. Since we thus know the zeros, we may find a polynomial in $T$ that satisfies these zeros and thus we may find such a polynomial for $p_U$ by defining $p_U(X) = Tp_S^{-1}$. 
+\subsection*{Uniqueness}
+Suppose that there exist $\tilde{T_U}$, $\tilde{T_S}$ that also satisfy properties i)-iii). Then define $\tilde{T_N} = \tilde{T_S}(\tilde{T_U}-1)$. Clearly $\tilde{T_N}$ commutes with $\tilde{T}$ and $\tilde{T_U}$ (by the above). Now, we know from the original theorem that the $T_N$ and $T_S$ are unique and thus so must be the $T_U$ and $T_S$. 
+\section*{Problem 3}
+We wish to find representatives of all conjugacy classes in $SL(2,\R)$. Recall that the conjuagacy relationship $\sim$ is defined as
+\[ A\sim B \iff \exists C\in SL(2,\R) \text{ s.t. } A=CBC^{-1} \]
+Now, by problem 2 any matrix $B$ in $SL(2,R)$, can be uniquely written as 
+\[ B= DJD^{-1} = DB_UB_SD^{-1} \]
+For some $2\times 2$ diagonal matrix $B_S$ with complex entries , some unipotent matrix $B_U$ and some $D\in M(2\times 2,\C)$. Let us thus find all possible such matricies. For $B_S$, we have two kinds of possible such matrices:
+\begin{multicols}{2}
+\noindent
+\[  B^{(1)}_S = \begin{pmatrix}
+x&0\\
+0&\frac{1}{x}
+\end{pmatrix} \]
+\[  B^{(1)}_S = \begin{pmatrix}
+e^{ix}&0\\
+0&e^{-ix}
+\end{pmatrix} \]
+\end{multicols}, and for 
+$B_U$, there are again two such choices:
+\begin{multicols}{2}
+\noindent
+\[ B^{(1)}_U = \begin{pmatrix}
+1&y\\
+0&1 \end{pmatrix}\]
+\[ B^{(2)}_U = \begin{pmatrix}
+1&0\\
+y&1 \end{pmatrix}\]
+\end{multicols}
+It is easy to see why those matrices cannot possibly inhabit the same conjugacy class: To go from one to the other would require a rotation matrix that has determinant $-1$ and is thus not in $SL(2,\R)$.
+The conjugacy classes are now all combinations of the above:
+Let us first consider $B^{(1)}_S$ and let us start with the special case $x=\pm 1$. For each, there is three different combinations, namely just $B^{(1)}_S$ (the identity for $+1$, $-I$ for $-1$),$B^{(1)}_U$,$B^{(2)}_U$. Now, in general for $B^{(1)}_S$, we get one conjugacy class for every $x\in \R \backslash [-1,1]$ (note that we only get one because the flipped diagonal elements are conjugate to the matrix where $x$ is replaced by $-x$). Note that we need not consider the unitary matrices, since the only unipotent matrix that commutes with $B^{(1)}_S$ for $x \neq \pm 1$, is the identity identity matrix. For the matrices with complex eigenvalue, this does not hold and instead, we get two conjugacy classes of each value of $0\leq x \leq 2\pi$. In summary, these are the representatives of the conjugacy classes:
+\[ \pm I, \begin{pmatrix}
+1&1\\0&1
+\end{pmatrix}, \begin{pmatrix}
+1&0\\1&1
+\end{pmatrix},
+\begin{pmatrix}
+x&0\\
+0&\frac{1}{x}
+\end{pmatrix} \forall x\in \R \backslash [-1,1],
+\begin{pmatrix}
+\cos\theta&-\sin\theta\\
+\sin\theta&\cos\theta
+\end{pmatrix},
+\begin{pmatrix}
+\cos\theta&\sin\theta\\
+-\sin\theta&\cos\theta
+\end{pmatrix} \forall \theta \in (0,2\pi) \]
+\end{document}

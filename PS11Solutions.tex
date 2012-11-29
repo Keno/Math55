@@ -1,0 +1,211 @@
+\title{Math 55: Problem Set 11}
+\include{prelude}
+\maketitle
+\section*{Problem 1}
+We may regard the transformation $(a_n, a_{n-1}, a_{n-2})\to (a_{n+1}, a_n, a_{n-1})$ 
+as follows 
+\[ \begin{pmatrix}
+a_{n+1}\\a_n\\a_{n-1}
+\end{pmatrix} = A\begin{pmatrix}
+a_n\\a_{n-1}\\a_{n-2}
+\end{pmatrix}=\begin{pmatrix}
+3&0&-4\\
+1&0& 0\\
+0&1&0
+\end{pmatrix} \begin{pmatrix}
+a_n\\a_{n-1}\\a_{n-2}
+\end{pmatrix} \]
+This matrix has characteristic polynomial: 
+\[ p_{char}(\lambda) = (3-\lambda)\lambda^2 - 4 = -[(\lambda-2)^2(\lambda+1)] \]
+For $\lambda=-1$, we can easily compute the eigenvector obtain $\lambda_{-1}=^t\begin{pmatrix}
+1&-1&1
+\end{pmatrix}$, but for $\lambda=2$, we get only one eigenvector $\lambda_{2}=^t\begin{pmatrix}
+4&2&1
+\end{pmatrix}$ even though $\lambda=2$ has algebraic multiplicity $2$. We thus need to find the a generalized eigenvalue. Simple computation yield:
+\[ (A-2I)^2 = \begin{pmatrix}
+1&-4&4\\ -1&4&-4\\1&-4&4
+\end{pmatrix}  \]
+Which has the three generalized eigenvaluesx
+\begin{multicols}{3}
+\noindent
+\[
+\lambda_{2,1} = \begin{pmatrix}
+0\\1\\1
+\end{pmatrix}
+\]
+\[
+\lambda_{2,2} = \begin{pmatrix}
+4\\1\\0
+\end{pmatrix}
+\]
+\[\lambda_{2,3} = \begin{pmatrix}
+4\\0\\-1
+\end{pmatrix}
+\]
+\end{multicols}
+We may pick any of the above, e.g. $\lambda_{2,2}$ (which will gives us $(4,2,1)$ as the associated type  I eigenvector).
+Now, we may write the matrix $A$ in Jordan canonical form:
+\[
+J = S^{-1} A S = \begin{pmatrix}
+-1&0&0\\
+0&2&1\\
+0&0&2
+\end{pmatrix}
+\]
+With 
+\[ S = \begin{pmatrix}
+1&4&4\\-1&2&1\\1&1&0
+\end{pmatrix}
+\]
+Now, since $S^{-1}S=I$,
+\[ A^n = (SJS^{-1})^n = SJ^nS^{-1} = S\begin{pmatrix}
+(-1)^n&0&0\\
+0&2^n&n2^n\\
+0&0&2^n
+\end{pmatrix}
+S^{-1}\]\[=\frac{1}{9}
+\begin{pmatrix}
+1&4&0\\-1&2&1\\1&1&1
+\end{pmatrix}
+\begin{pmatrix}
+(-1)^n&0&0\\
+0&2^n&n2^n\\
+0&0&2^n
+\end{pmatrix}
+\begin{pmatrix}
+1&-4&4\\
+-1&4&5\\
+3&-3&6
+\end{pmatrix}
+\]
+Now, to find the closed form for $a_n$, we only need to find the first row of $A^{n-3}$ and apply the vector of initial conditions to that. Or we may apply the initial conditions first, which makes this problem a lot easier, and we get: 
+\[ a_n = -\frac{8(-1)^n}{9} - \frac{2^n}{9} - \frac{(n-3)2^{n-2}}{3} \]
+\section*{Problem 2a)}
+\subsection*{Convergence}
+Let $A$ be a $k\times k$ matrix and let $a=max_{i,j} |(A_{ij})$.Since we are associating the matrix with $\R^{k^2}$, it suffices to show that each of the entries of the matrix converge to some value (we may just consider the standard product metric here and make each entry differ less than $\epsilon/k^2$ from its limit). 
+ Now note that for $A^n$, we must have
+\[ |A^n_{i,j}| \leq |k^{n-1} a^n| \]
+Now,
+So
+\[ \left|\left(\frac{A^n}{n!}\right)_{i,j}\right| \leq  \frac{k^{n-1} a^n}{n!}\leq  \frac{(ka)^n}{n!} = e^{ka} \]
+and
+\[\sum_{n\geq 0}  \frac{(ka)^n}{n!} = e^{ka} \]
+so each entry converges by the series comparsion test and $\sum \frac{A^n}{n!}$ converges as well by the above argument.
+\subsection*{Inverse}
+We will consider $e^A=\sum_{n\geq0}\frac{A^n}{n!}$ as a power series in $\Q[[A]]$ and similarly $e^{-A}=\frac{(-A)^n}{n!}$. Now, by multiplication in $\Q[[A]]$, we have 
+\[ e^Ae^{-A} = \sum_{l \geq 0}\sum_{i=0}^l \frac{(-1)^i}{1}\frac{1}{(l-i)!} A^n = \sum_{l \geq 0} \frac{1}{l!} \sum_{i=0}^l{l\choose i} (-1)^i(1)^{l-1}\], which by the binomial theorem is the expansion of $(1-1)^n$ for $n\neq 0$. For $n=0$, we have $A^0=1$, so
+\[ e^Ae^{-A}=I \]
+as desired.
+\subsection*{Derivative}
+For $e^{tA}$, let $(e^{tA})_k$ denote the $k-th$ partial sum of the power series expansion. Then
+\[ \frac{d}{dt} \lim_{k\to \infty} (e^{tA})_k =  \lim_{k\to \infty} \frac{d}{dt} (e^{tA})_k \]
+Since limits commute and we may consider the derivative a limit as $\Delta t \to 0$.
+Now
+\[ \frac{d}{dt} (e^{tA})_k = \frac{d}{dt} \frac{(tA)^k}{k!} = \frac{A(tA)^k}{(k-1)!} \]
+So
+\[ \frac{d}{dt} e^{tA} = \frac{d}{dt} \lim_{k\to \infty} (e^{tA})_k = \sum_{k=0}^{\infty} \frac{A(tA)^{k-1}}{(k-1)!}  = A\sum_{k=1}^{\infty} \frac{(tA)^{k-1}}{(k-1)!} = A \lim_{k\to\infty} (e^{tA})k = Ae^{tA} \]
+\section*{Problem 2b)}
+We have 
+\[ f'(t) = Af(t) \].
+Left multiplying both sides $e^{-tA}$, we get
+\[ e^{-tA} f'(t) = e^{-At} A f(t) \]
+Now, note that since $e^{tA} = \sum \frac{(tA)^n}{n!}$, $A$ commutes with $-e^{-tA}$. And thus we have
+\[ -e^{-tA}f'(t) = -Ae^{-tA}f(t) \]
+or 
+\[ -Ae^{-tA}f(t) + e^{-tA}f'(t) = 0 \]
+\[ \frac{d}{dt}\left[-e^{-tA}\right] f(t) + e^{tA}f'(t) = 0 \]
+\[ \frac{d}{dt}\left[e^{-tA} f(t)\right] = 0\]
+\[ e^{-tA} f(t) = f_0 \]
+\[ f(t) = e^{tA} f_0 \]
+where $f_0$ is some arbitrary constant vector. Note that in the above derivation we have used the fact that Leibnitz's rule holds for matrices. A rigorous proof for this lacks the groundwork in establishing that it holds for $\R$. However, we can that matrix multiplication is just a sum of dot product for which it is somewhat more intuitive that it should hold.
+\section*{Problem 2c)} 
+We may write the problem as follows
+\[ \begin{pmatrix}
+f'''\\f''\\f'
+\end{pmatrix} = A\begin{pmatrix}
+f''\\f'\\f
+\end{pmatrix}=\begin{pmatrix}
+1&1&-1\\
+1&0&0\\
+0&1&1\\
+\end{pmatrix}\begin{pmatrix}
+f''\\f'\\f
+\end{pmatrix}\]
+with the polynomial
+\[ p_{char} = (1-x)x^2 + x - 1  = -(x^3-x^2-x+1) = -(x-1)(x^2-1) = -(x-1)^2(x+1) \]
+So we have eigenvalues $1$ (of algebraic multiplicity 2) and $-1$ (of algebraic multiplicity 1). Now, for $\lambda = -1$, we get $\lambda_1 = ^t(1 -1 1)$, and for $\lambda=1$ we get one generalized eigenvector of order $1$ given by $^t(1 1 1)$ with the associated generalized eigenvector of order $2$ given by $^t(2 1 0)$. 
+Now 
+\[ e^{tA} = \sum \frac{(tA)^n}{n!} = S t^n J^n S^{-1} = \sum \frac{1}{n!}\frac{1}{4}\begin{pmatrix}
+1&2&1\\
+1&1&-1\\
+1&0&1\\
+\end{pmatrix}\begin{pmatrix}
+t&nt&0\\
+0&t&0\\
+0&0&(-t)^n
+\end{pmatrix}\begin{pmatrix}
+-1&2&3\\
+2&0&-2\\
+1&-2&1
+\end{pmatrix} \]
+\[ 
+= \frac{1}{4}\begin{pmatrix}
+1&2&1\\
+1&1&-1\\
+1&0&1\\
+\end{pmatrix}\begin{pmatrix}
+\sum \frac{t}{n!}&\sum \frac{nt}{n!}&0\\
+0&\sum \frac{t}{n!}&0\\
+0&0&\sum \frac{(-t)^n}{n!}
+\end{pmatrix}\begin{pmatrix}
+-1&2&3\\
+2&0&-2\\
+1&-2&1
+\end{pmatrix}
+\]\[= \frac{1}{4}\begin{pmatrix}
+1&2&1\\
+1&1&-1\\
+1&0&1\\
+\end{pmatrix}\begin{pmatrix}
+e^t &te^t\\
+0&e^t&0\\
+0&0&\frac{1}{e^t}
+\end{pmatrix}\begin{pmatrix}
+-1&2&3\\
+2&0&-2\\
+1&-2&1
+\end{pmatrix}
+= \frac{1}{4} \begin{pmatrix}
+e^t \left[t+3\right] + e^{-t} & 2\left[e^t-e^{-t}\right]&e^t\left[3-2t\right]\\
+e^t\left[t+1\right]-e^{-t} & 2\left[e^t+e^{-t}\right] & e^t \left[1-2t\right]-e^{-t}\\
+e^{t}\left[2t-1\right]+e^{-t}&2\left[e^t-e^{-t}\right]&e^t\left[3-2t\right]+e^{-t}
+\end{pmatrix}
+\]
+So we have for the general solution $f(t) = A\left(e^{t}\left[2t-1\right]+e^{-t}\right)+B\left(2\left[e^t-e^{-t}\right]\right)+C\left(e^t\left[3-2t\right]+e^{-t}\right)
+= e^{t}([2A-2C]t - A + 2B + 4C) + e^{-t}[A-B+C] =
+Dte^t + Ee^t + Fe^{-t}
+$ for some arbitrary constants $D,E,F$.
+\section*{Problem 3a)}
+Let $V$ be a vector space, not necessarily finite dimensional, and let $w_\alpha$, $\alpha\in A$ be a basis of $V$.
+\begin{lemma}
+$a(\sigma)\in \End(\tensorp^k V)$ defined by 
+\[ a(\sigma)(v_1\tensor v_2 \tensor \cdots \tensor v_k) = v_{\sigma^{-1}(1)} \tensor v_{\sigma^{-1}(2)} \tensor  \cdots \tensor v_{\sigma^{-1}(k)} \] is equivalently defined by constraining $v_1,\ldots,v_k$ to be basis vectors of $V$.
+\begin{proof}
+Clearly if the formula holds for all $x\in \tensorp^K V$, then it will hold for the basis elements. Now, assume that it holds for the basis elements $w_\alpha$, $\alpha\in A$.  $w_{\alpha_1}\tensor \cdots \tensor w_{\alpha_k}$, $w_{\alpha_1},\ldots,w_{\alpha_k}\in A$ is a basis for $\tensorp^K V$ and consider any $v_1\tensor v_2 \tensor \cdots \tensor v_k$. Any of these vectors may be written as a finite linear combination of the basis elements $w_\alpha$ and by $k$-linearity, of the tensor product this holds true for the all of $\tensorp^k V$ and the formula must holds as well, since we never exchange components of the tensor product.
+\end{proof}
+\end{lemma}
+\begin{proof}
+By the above lemma, $a(\sigma)$ is well defined, since any linear transformation that is defined precisely on all it's basis elements is well defined. \par 
+We will now proof that $a(\sigma)$ is a representation of $S_k$ on $\tensorp^k V$. We have already shown that $a(\sigma)$ is a linear transformation. We also have $a(1_{S_k}) = 1_{\tensorp^k V}$ which can be easily seen by the above formula since $(1_{S_k})^{-1}=1_{S_k}$. Now, let $\sigma,\phi \in S_k$. We have
+\[ a(\sigma)(v_1\tensor v_2 \tensor \cdots \tensor v_k) = v_{\sigma^{-1}(1)} \tensor v_{\sigma^{-1}(2)} \tensor  \cdots \tensor v_{\sigma^{-1}(k)} \]
+\[(a(\sigma)\circ a(\phi))(v_1\tensor v_2 \tensor \cdots \tensor v_k) = a(\phi)(v_{\sigma^{-1}(1)} \tensor v_{\sigma^{-1}(2)} \tensor  \cdots \tensor v_{\sigma^{-1}(k)}) \]\[= v_{\phi^{-1}\sigma^{-1}(1)} \tensor v_{\phi^{-1}\sigma^{-1}(2)} \tensor  \cdots \tensor v_{\phi^{-1}\sigma^{-1}(k)} = a(\sigma\phi)(v_1\tensor v_2 \tensor \cdots \tensor v_k) \] 
+since $(\sigma\phi)^{-1}=\phi^{-1}\sigma^{-1}$.
+\end{proof}
+\section*{Problem 3b)}
+Let $G$ be a group, let $V$ be vector space and let $\pi$ be a representation of $G$ on $V$. We want to show that $\tensor^k \pi$ is a representation of $G$ on $\tensorp^k V$. To do so we will show that defining $(\tensor^k \pi)(g)(v_1\tensor\cdots\tensor v_k)=\pi(g)(v_1)\tensor\cdots\pi(g)(v_k)$ gives us such a representation. First note that clearly $(\tensor^k \pi)(e) = 1_{\tensorp^k V}$ since $\pi(e)$ is just the identity map (since $\pi$ is a representation). What remains to be shown is that $(\tensor^k \pi)(gh)=(\tensor^k \pi)(g)\circ (\tensor^k \pi)(h)$. To do so consider, 
+\[ ((\tensor^k \pi)(g)\circ (\tensor^k \pi)(h))(v_1\tensor\cdots\tensor v_k) = (pi(g)\circ\pi(h))v_1\tensor\cdots\tensor (pi(g)\circ\pi(h))v_k \]\[= (pi(gh))v_1\tensor\cdots (pi(gh))v_k = (\tensor^k \pi)(gh)(v_1\tensor\cdots\tensor v_k)  \]
+\section*{Problem 3c)}
+It is easy two see that $(\tensor^k \pi)(g)\circ a(\sigma) = a(\sigma)\circ (\tensor^k \pi)(g)$, by considering their action on an arbitrary spanning set:
+\[ ((\tensor^k \pi)(g)\circ a(\sigma))(v_1\tensor \cdots \tensor v_k) = \pi(g)(v_{\sigma^{-1} 1}) \tensor \cdots \tensor \pi(g)(v_{\sigma^{-1} k}) \] However, note that, since we apply the same transformation $\pi$ to all the $v$, it doesn't matter whether we apply $a$ before or afterwards. Thus
+\[ = a(\sigma)((\tensor^k \pi)(g)(v_1\tensor \cdots \tensor v_k)) = (a(\sigma)\circ (\tensor^k \pi)(g))(v_1\tensor \cdots \tensor v_k) \]
+\end{document}

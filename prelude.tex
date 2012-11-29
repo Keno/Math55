@@ -3,7 +3,10 @@
 \usepackage{amsmath} 
 \usepackage{amssymb}
 \usepackage{ulem}
+\usepackage{wasysym}
 \usepackage{tikz}
+\usepackage{multicol}
+\usepackage{verbatim}
 \usepackage[left=1in,top=1in,right=1in,bottom=1in,nohead]{geometry}
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{decorations.pathreplacing}
@@ -21,8 +24,11 @@
 \newtheorem{rem}{Remarks}
 \newtheorem{obs}{Observation}
 \newtheorem{claim}{Claim}
+\newtheorem{term}{Terminology}
 \newcommand{\biu}[1]{\underline{\textbf{\textit{#1}}}}
 \newcommand{\so}{\Rightarrow}
+\newcommand{\onlyif}{\Leftarrow}
+\newcommand{\myiff}{\Leftrightarrow}
 \usepackage[ampersand]{easylist}
 
 \let\oldemptyset\emptyset
@@ -32,14 +38,25 @@
 
 \newcommand{\homework}{\biu{Homework}}
 \newcommand{\Mor}{\text{Mor}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\clos}{\text{clos }}
+%\newcommand{\Im}{\text{Im }}
+\newcommand{\Ker}{\text{ker }}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
-\newcommand{\limn}{\lim\limits_{n\to\infty} a_n}
-\newcommand{\limk}{\lim\limits_{n\to\infty} a_n}
+\newcommand{\limn}{\lim\limits_{n\to\infty} }
+\newcommand{\limk}{\lim\limits_{k\to\infty} }
 \newcommand{\pabs}[1]{\left|\left| #1 \right|\right|_p}
+\newcommand{\mesh}{\text{mesh}}
+\newcommand{\set}[1]{\left{#1 \right}}
+\newcommand{\paren}[1]{\left(#1 \right)}
+\newcommand{\tensorp}{\bigotimes}
+\newcommand{\tensor}{\otimes}
+\newcommand{\Wedge}{\bigwedge}
+\newcommand{\End}{\text{End}}
 %\newcommand{\pabs}[1]{#1}
 \begin{document}
 \tikzstyle{lattice}=[shape=circle,draw,fill,text=white]

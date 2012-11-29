@@ -1,0 +1,47 @@
+\include{prelude}
+\section*{Problem 1)}
+First note that both compact spaces and metric spaces are at least $T_2$ and thus they are $T_1$, so we only need to show that there exist disjoint open neighborhoods of closed subsets. 
+\subsection*{Compact Hausdorff spaces}
+We will first prove that every compact Hausdorff space is normal. For that purpose let $X$ be a compact Hausdorff space and let $S_0, S_1$ be closed sets in $X$ s.t. $S_0\cap S_1 = \emptyset$. Then since $X$ is compact, $S_0$ is compact and $S_1$ must be compact as well (since they are closed subsets of a compact space). \par
+Now, consider any $x\in S_0$. Then for every $y\in S_1$, there exist open neighborhoods $N_{x_y}, N_{y_x}$ of $x$ and $y$ respectively. Now, consider the collection of all $N_{y_x}$ for our chosen $x$. That collection is an open cover of $S_1$, since every $y$ is in at least one of the neighborhoods (namely $N_{y_x}$). Now, since $S_1$, is compact, there must exist a finite subcover of that open cover and thus there must exist finitely many $y'$ such that the collection of open sets $N_{y'_x}$ covers $S_1$. Now define $A_x=\cap_{y'}  N_{x_y'}$ and define $B_x = \cup_{y'} N_{y'_x}$ Now, clearly both $A_x$ and $B_x$ are open and $A_x$ is an open neighborhood of $x$, $B_x$ is an open neighborhood of $S_1$ and we have $A_x\cap B_x=\emptyset$ (since $A\cap \cup_{i\in I} B_i = \cup_{i\in I}  (A \cap B_i)$ and the intersection of finite sets is commutative). \par 
+Now let $C=\{A_x | x\in S_0\}$ be the collection of all such $A_x$. Then since $x\in A_x$, $C$ covers $S_0$ and thus there must exist finitely many $x'$ such that the collection of all $A_{x'}$ cover $S_0$. Now let $A=\cup A_{x'}$ and let $B=\cap B_{x'}$. Clearly $A$ and $B$ are open and $B$ is still an open neighborhood of $S_1$ (since $S_1\subset B_{x'}$ for all $x'$) and $A$ is an open neighborhood of $S_0$. By construction however, we have $A\cap B= \emptyset$ and thus $X$ is normal \par
+\subsection*{Metric Spaces}
+Let $(X,d)$ be a metric space and let $S_0$, $S_1$ be closed subsets of $X$ such that $S_0\cap S_1 =\emptyset$. Now let $d_S(x) = \{ \inf d(x,y) | y\in S\}$. Now, since $S_1\cap S_0=\emptyset$, we must have $d_{S_0}(y)>0 \forall y\in S_1$. and thus me must have $\epsilon = \inf d_{S_0}(S_1)>0$. Now we may find collections of open balls $A=\{B(x,r)| 0<r<\frac{\epsilon}{2}, x\in S_0 \}$ and $C = \{B(y,r)| 0<r<\frac{\epsilon}{2}, y\in S_1 \}$. Now by our choice of $\epsilon$, must have for all $a\in A, c\in C$ $a\cap c=\emptyset$. And thus for $N_{S_0}=\cup_{a\in A} a$, $N_{S_1} = \cup{c\in C} c$ we must have $N_{S_0}\cap N_{S_1} = \emptyset$. And thus $N_{S_0}$ and $N_{S_1}$ are disjoint open neighborhoods (for $N_{S_0}$ contains every $x\in S_0$ and $N_{S_1}$ contains every $y\in S_1$) and thus we must have that $X$ is normal.
+
+
+\section*{Problem 2a)}
+\begin{proof}
+Let $X$ be a Hausdorff space and let $N=(S,D,\geq)$ be a net in $X$ such that $N$ converges to $x_0 \in X$. Now, we will prove by contradiction that $N$ cannot converge simultaneously to any other point. Assume that there exists a point $y\in X$ such that $N$ converges to $y$, but $x_0\neq y$. Then, since $X$ is Hausdorff, we may find neighborhoods $N_x$ and $N_y$ of $x_0$ and $y$ respectively, such that $N_x \cap N_y = \emptyset$. Furthermore, we may find $n_1,n_2 \in D$, such that $n\geq n_1 \so S(n) \in N_x$ and $n\geq n_2 \so S(n) \in N_y$. However, the same must hold true for $n\geq M=\max(n_1,n_2)$ and thus we must have $S(n) \in N_x$, and $S(n) \in N_y$ which is clearly a contradiction. 
+\end{proof}
+\section*{Problem 2b)}
+\biu{If:}\begin{proof}
+We shall call a net $N=(S,D,\geq)$ to be ``in $B$'' if the image $S(D)\subseteq B$.
+
+Since no net converges to any point $x\in (X-B)$, for every such point we may find an open neighborhood $N_x \cap B = \emptyset$ (this is because be we consider any net in $B$, so if there were an element in $y\in(N_x\cap B)$, we could just choose $S(d)=y$). Now, we may find such a neighborhood for all points $x\in (X-B)$, so let $N_x$ be such a neighborhood for that specific point $x$. Now, since $N_x \cap B = \emptyset$, we must have $N_x\subset X-B$ and clearly also $\cup_{x\in(X-B)} N_x\subseteq X-B$. However, since $x\in N_x$ for at least one $N_x$ for all $x\in X-B$, we must have $X-B\subseteq N_x$. And thus we must have $\cup_{x\in(X-B)} N_x = X-B$. This implies that $\cap_{x\in(X-B)} (X-N_x) = B$. Now, the LHS is an arbitrary intersection of closed sets and thus $B$ must be closed. 
+\end{proof}
+\biu{Only if:}\begin{proof}
+Let $B$ be a closed subset of $X$. Now, assume that there exists $y_0\in X-B$ and let  $N=(S,D,\geq)$  be an net in $B$ (i.e. $S(D)\subseteq B$. Now, since $B$ is closed $X-B$ must be open and thus $X-B$ is an open neighborhood of $y_0$. However, since $(X-B)\cap B=\emptyset$, and since $S(D)\subset B$, there cannot exist any $n\in D$ such that $S(n)\in X-B$ and thus $N$ cannot converge to $y_0$.
+\end{proof}
+\section*{Problem 2c)}
+\subsection*{If}
+\begin{proof}
+Let $N=(S,D,\geq)$ be a net in $B$ converging to $x$. Recall that we defined $\clos B = \cap_{\alpha \in A} C_\alpha$ where $C_\alpha$ are all closed subset of $X$ such that $B \subset C_\alpha$. Clearly $N$ must also be in $C_\alpha \forall \alpha \in A$ and thus by problem 2b) $x\notin (X-C_\alpha) \forall \alpha \in A$. This implies that $x \notin \cup_{\alpha \in A} (X-C_\alpha)$. And thus we must have $x \in X-\cup_{\alpha \in A} (X - C_\alpha) = \cap_{\alpha \in A} C_\alpha$
+by De Morgan's Law. However, since $\clos B = \cap_{\alpha \in A} C_\alpha$, we must have $x\in \clos B$ as desired.
+\end{proof}
+\subsection*{Only if}
+\begin{proof}
+Assume that $x\in \clos B$, but that there exists no net in $B$ such that x is the limit of that net. That would imply that for some neighborhood $N_x$ of $x$, there does not exist any $b\in B$ such that $b\in N_x$ (since we are free to choose any net. However, since $x\in \clos B$ we must have that for all open neighborhoods $N_x$, $N_x\cap B\neq \emptyset$ and thus there must exist a net that converges to $x$. 
+\end{proof} 
+\section*{Problem 2d)}
+\subsection*{If}
+\begin{proof}
+Let $N=(S,D,\geq_D)$ be a net in $X$ and let $B=(T,E,\geq_E)$ be a subset of $N$ converging to some $x\in X$. Now, since $B$ is a subnet of $N$, there exists a function $F: E\to D$ such that for all $n_0\in D$, there exists $k_0$ such that $k\geq_E k_0 \so F(k) \geq_D n_0$. \par
+Now let $N_x$ be any neighborhood of $X$ and let $n_0$ in $D$. Now, there exists $e_0$ such that $e\geq e_0 \so F(e) \in N_x$ (since $B$ converges). Furthermore, there exists $k_0 \in E$ such that $k\geq_E k_0 \so F(k)\geq_D n_0$. Clearly the same must hold for some $k_1 \geq \max\{k_0, e_0\}$. Now for $n=F(k_1)$, we have $n\geq n_0$ and $S(n) = S(F(k_1)) = T(k_1) \in N_x$ and thus $x$ is a cluster point of $N$ as desired. 
+\subsection*{Only if}
+First note that if a net converges, it trivially has a convergent subnet given by $(T,E,\geq_E)$, $T=S\circ I$, $E\subset D$, $\geq_E = \geq_D|_E$. We will thus assume from now on that $N$ does not converge. \par
+Let $N=(S,D,\geq_D)$ be a net in $X$ and let $x\in X$ be a cluster point of $N$. Now, suppose that $S(n) = x$ for infinitely many $n\in D$ then let $E$ be the set of all such $n$, let $\geq_e = \geq_D|_{E}$ and let $F(e)=e$. Now, clearly the net $M=(T,E,\geq_E)$ where $T=S\circ F$ converges to $x$ (since $T(e) = x \forall e\in E$ and it must thus lie in every neighborhood of $x$). Now, since $F$ is just the identity we have $F(e) \geq n_0$, whenever $e\geq k_0 = n_0$ and thus $M$ is a subnet of $N$. \par
+From now on we will thus assume that $S(n)=x$ for only finitely many $n\in D$. Then we may find $n_1$ such that for all $n\geq_D n_1$, $S(n)\neq x$. Clearly redefining $D$ to only consist of element $\geq n_1$ will not change the notions of cluster point convergence or convergence of a subnet, so without loss of generality, we may assume that $S(n)\neq x \forall n\in D$. Now, consider a different set $E$ given as the collection of neighborhoods of $x$ and define $\geq_E$ for $U_1,U_2\in E$ by $U_1 \geq_E U_2 \iff U_1 \subset U_2$. Now note that for any finite subset of $E$ the intersection of the elements of the finite subset must be an open set, contain $x$ and must be $\geq$ than all of the elements of the  finite subset. Thus every finite subset of $E$ has an upper bound and $(E,\geq_E)$ is a directed system. Now for any neighborhood $N_x \in E$, let $F(N_x)$ be any point $a\in D$ such that $a\in N_x$ (the existence of which is guaranteed by the fact that $x$ is a cluster point of $N$) . Now let the net $M=(T,E,\geq_E)$ where $T=S\circ F$. \par
+We will first verify that $N$ does indeed converge to $x$. For that purpose consider any neighborhood $N_x$ of $x$ (note that this implies $N_x$ in $E$) and let $n_0=N_x$, then for any $n\geq n_0=N_x$, we have $n\subset N_x$ and thus we must have $T(n)\in n \subset N_x$ by definition of $T$ and thus $M$ converges to $x$ as desired. \par 
+We will next verify that $M$ is a subnet of $N$. Let $n_0\in D$ and let $k_0 \in E$ be some element in $E$ such that for all $n \leq n_0, S(n)\notin k_0$ (such a $k_0$ exists since $N$ does not converge to $x$, and since $S(n)\neq x$ for all $n\in D$)  The we must have for $k \geq k_0$, $S(F(k))\in k_0$ and thus we must have $F(k)\geq  n_0$
+\end{proof}
+\end{document}

@@ -1,0 +1,78 @@
+\title{Math 55: Problem Set 10}
+\include{prelude}
+\maketitle
+\section*{Problem 1a)}
+\begin{proof}
+Let $p, q \in K[X]$ i.e. $p(X) = \sum_{i=0}^n a_i X^i$, $q(X) = \sum_{i=0}^m b_i X^i$. Now, the product between the two is
+\[ (pq)(X) = (\sum_{i=0}^n a_i X^i)(\sum_{j=0}^m b_j X^j) = \sum_{i=0}^n \sum_{j=0}^m a_i b_j  X^{i+j} \]
+By the linearity of the derivative map, we have
+\[  (pq)'(X) = \sum_{i=0}^n \sum_{j=0}^m a_i b_j (i+j)  X^{i+j-1} 
+\]\[ = \paren{\sum_{i=0}^n i a_i X^{i-1} }\paren{ \sum_{j=0}^m b_j X^j } + \paren{ \sum_{i=0}^n a_i X^i }\paren{ \sum_{j=0}^m jb_j X^{j-1} }  = p'q + pq'
+\]
+as desired. 
+\end{proof}
+\section*{Problem 1b)}
+\begin{lemma}
+For $p(X)=(X-a)^N$, $p'(X)=N(X-a)^{N-1}$. 
+\begin{proof} By Leibnitz's rule, thus is true for $n=2$:
+\[ ((X-a)(X-a))' = (1)(X-A)+(X-1)(1)=2(X-A) \]
+Now suppose it holds for some $n$, then 
+\[ ((X-a)^{n+1})' = ((X-a)^n(X-a))' = ((X-a)^n)'(X-a) + (X-a)^n(1) =  n (X-a)^{n-1}(X-a) + (X-a)^n \]\[ = (n+1)(X-a)^n  \]
+as desired.
+\end{proof}
+\end{lemma}
+Let $K$ be a field of characteristic $0$.
+\subsection*{Only if}
+\begin{proof}
+If $p$ has a root of order exactly $n$ at $a\in K$, then there must exist a polynomial $s(X)$ such that $p(X)=(X-a)^ns(X)$ where $(X-a)$ does not divide $s(x)$. Now $p'(X) = n (X-a)^{n-1} s(X) +  (X-a)^{n} s'(X)$ which must necessarily be $0$ (for $n\geq 1$). Higher order derivatives  will also yield polynomials in  $(X-a)$ multiplied by some derivative of $s(X)$. However, realizing that the lowest order (in $(X-a)$) term is all that matters, we may write (as long as $n-1\geq 0$, $p^{(n)}(X) = \frac{n!}{(n-i)} (X-a)^{n-i} s(X) + (X-a) r(X)$. Now, clearly we must have $p^(i)(a)=0$ for $1\leq i \leq n-1$ and $p^{(n)}(a) = n! s(a)\neq 0$ since $(X-a)$ (which is the unique irreducible polynomial such that $p(a) = 0$) does not divide $s$ and since $K$ has characteristic $0$ (otherwise the characteristic could be less than $n$ which would make the expression $0$).
+\end{proof}
+\subsection*{If}
+\begin{lemma}
+Any polynomial $p\in K[X]$ of degree $N$ may be uniquely factored into irreducible monic polynomials $\{ p_i(X) | 1\leq 1\leq N \leq n \}$.
+\begin{proof}
+First note that if $p$ is not monic we may turn it into a monic polynomial by multiplication by a constant factor (given by the inverse of the coefficient of $X^n$). Now any polynomial may either be reducible or irreducible. If it is irreducible, add it to the sequence of irreducible polynomials. If not, repeat this procedure with the two factors. Since $n$ is finite, there may be at most $n$  factors (plus a constant factor) and thus such a factorization always exists. \par
+Now assume that there exist two factorizations $p_1(X)p_2(X)p_3(X)\cdots$, $q_1(X)q_2(X)q_3(X)\cdots$. Since the original polynomials is monic, we must have at least one factor in common (for otherwise the the would not multiply to the same polynomial by the Euclidean algorithm). Now consider all the sets of polynomials in $q_i$ where only one factor is different from that in $q_i$ (if there are multiple such factors, consider one factor that is not equal together with all the common factors). Clearly the zero of the non-common factor must be also a zero of the non-common factor of the other polynomial and since the irreducible factors are unique, they must be equal. 
+\end{proof}
+\end{lemma}
+Let $a\in K$ and let $p\in K[X]$ be of degree $N$ and there exists a number $n$ such that $p(a)=p'(a) = p''(a) = \cdots = p^{(n-1)}(a) = 0$ but $p^{(n)}(a)\neq 0$. Now consider the factorization of $p$ into its unique monic irreducible polynomials:
+\[ p(X)=p_1(X)p_2(X)p_3(X)\cdot p_j(j) \]
+where $1\leq j \leq N$ for some $N$. Such a factorization is unique by the above lemma. Since $p(a)=0$ it must have a zero at $p$ and thus at least one of the factors must be equal to $(X-a)$, so we may write
+\[ p(X)=(X-a)^k p_{i_1}(X) \]
+For some $1\leq k<N$, where $p_{i_j}(a)\neq 0$. Now consider the following cases:
+\begin{itemize}
+\item $k<n$ In this case we have $p^{(k)}(X) = \prod_{i_j} p_{i_j}(X) + (X-a)s(x)$, for some polynomial $s(x)$. However, since $p_{i_j}(a)\neq 0$, we have $p^{(k)}(X)=0$, but $k<n$, contrary to assumption.
+\item $k>n$ In this case we have $p^{(n)}(X) = (X-a)^{k-n}s(X)$, so we have $p^{(n)}(X) = 0$ contrary to assumption.
+\end{itemize}
+And thus we must have $k=n$ which implies $p(X)=(X-a)^nq(X)$, where $q(a)\neq 0$ so $(X-a)$ does not divide $q$, so $(X-a)^n$ divides $p$, but $(X-a)^{n+1}$ does not and thus $p$ has a root of exactly order $n$ at $a$.
+\section*{Problem 1c)}
+Let $p\in K[X]$ be an irreducible polynomial and let $L$ be an (not necessarily finite) extension field of $K$. If there exist no $a\in L$ such $p(a)=0$ we are done since $p(X)$ has no zeros in $L$. Other let $a\in L$ be any element such that $p(a) = 0$ (Note that there may only be finitely many such $a$ since $p$ must be of finite degree). First note that we can't have $p'(a) = 0$, since $p'$ is of lesser degree than $p$ and $p$ is the unique irreducible polynomial such that $p(a)=0$. Now, considering $p$ as an element in $L[X]$, we must have 
+\[ p(X) = (X-a)^n q(X) \]
+for some $n$ and $q(X)\in L[X]$, where $(X-a)$ does not divide $q(X)$. Taking the derivative on both sides (considered as an extension of the derivative map to $L[X]$), we have
+\[ p'(X) = n(X-a)^{n-1} q(X) + q'(X)(X-a) \]
+However, since we have $p'(X) \neq 0$, we must have $n=1$, for otherwise we would have $p'(a)=0$ and thus 
+\[ p(X) = (X-a) q(X) \]
+where $(X-a)$ does not divide $q(X)$ and thus $p$ has a zero of degree exactly one at $a$. However, since $L$, and $a$ were arbitrary, this means that $p(X)$ has only simple zeros in any extension field of $K$.
+\section*{Problem 2a)}
+Consider the map $\Phi: V^* \times W \times V \to W$ given by $\Phi(\phi, w, v) = \lbrace \phi, v \rbrace w$. Clearly this map is linear in $w$ and $\phi$ since $W$ is a vector space, since $\langle \phi, v \rangle \in K$ and since $\langle \phi+\theta, v \rangle \in K = \langle \phi,v\rangle + \langle \theta, v \rangle$. It is  also linear in $v$ since $\phi$ is a homorphism of vector spaces over $K$ (i.e. a linear map). Thus by the universal property of the tensor product, there exists a linear map $\Gamma: V^* \tensorp W \tensorp V \to W$. \par
+Now, recall that $V^* \tensorp W \tensorp V$ is isomorphic to $(V^* \tensorp W) \tensorp V$, so there exists a bilinear map $\Lambda: (V^* \tensorp W) \times V \to  V^* \tensorp W \tensorp V$. Now, for any $v^* \tensor w$, $(\Gamma \circ \Lambda)(v^* \tensor w, v)$ is a linear map from $V\to W$, that is to say an element of $Hom(V,W)$. Furthermore, the notions of addition and multiplication coincide by the bilinearity of $\Lambda$ (since, if we fix any $v$, we have a linear map to $W$ and since it holds for all $v$, we must have coinciding notions of addition and multiplication). \par
+To show that this map is not the zero map, we will show that it is injective i.e. it's kernel (the elements mapping to the zero homomorphism from $V$ to $W$) contains only $0_{V^*\tensorp W}$ (which will also be useful later on). To do so, consider an element $x \in V^* \tensorp W$ that maps to the zero homomorphism. Now Consider the original 3-linear map $\Phi$ and let us analyze all the cases in which we can have $\Phi(\phi, w, v)=0$ for all $v$ (since that is the definition of the zero homomorphism), and the elements in $V^* \times W \times V$ that form the span of the image of the such combinations. Clearly this is the case if $w=0$, $v=0$ which in both cases is just the zero element in $V^* \times W \times V$. Now consider the case in which $w\neq 0, v\neq 0$. We get 0 whenver $v\in \Ker\phi$. But, since $0\in Hom(V,W)$ is zero for all $v$, we are only concerned with those elements in the above image for which $\Ker \phi = 0$, which is only the case when $\phi = 0$ or $0_{V^*\tensorp W \tensorp V}$ is the only element in the desired set and only element $x$ that maps to $0\in Hom(V,W)$ is $0_{V^*\tensorp W}$, for otherwise we would have $x \tensor v \neq 0_{V^*\tensorp W \tensorp V}$ for $v\neq 0$.
+\section*{Problem 2b)}
+We have already shown that that the map from a (let's call it $F: V^*\tensorp W\to \Hom(V,W)$ is injective. What remains to be shown is that it is also surjective when $v$ and $w$ are finite dimensional. For that purpose, let $G\in \Hom(V,W)$ and let $\{v_1,\ldots, v_n\}$, $\{w_1,\ldots,w_m\}$. The map $G$ is completely characterized by its action on the basis elements of $V$ i.e. $Gv_i = \sum_{j=1}^m a_{ij} w_j$. Now, let $x\in V^* \tensor W$ be given by $x = \sum_{j=1}^m (v_i \to a_{ij})\tensor w_j)$. Clearly this map will map to $G$ by construction and thus $F$ is surjective. 
+\section*{Problem 2c)}
+If $V$, is finite dimensional, but $W$ is infinite dimensional, then the proof in b) still holds and the map is still in isomorphism. \par 
+Now consider the case in which $V$ is infinite dimensional, but $W$ is finite dimensional. Then every $T\in \Hom(V,W)$ is determined by $T v_\alpha = \sum c_i w_i$, where $\{v_\alpha | \alpha\in A\}$ is a basis of $V$ and $\{w_i | 1\leq 1 \leq m \}$ is a basis of $w$, now, for a given $T$, consider the map $p_i$ that maps $v_\alpha \to c_i$. Now $\sum_{1\leq i \leq m} (p_i \tensor w_i)$ will map to $T$ and since $T$ is arbitrary, the map will be surjective (and thus an isomorphism, since it is always injective). \par 
+Now, consider the case in which both $V$ and $W$ are infinite dimensional. It is easy to construct a homomorphism from $V$ to $W$ to which no element in the tensor product can map: Consider any two countable bases $v_\alpha$ of $V$ and $w_\beta$ of $W$.
+Then consider the homomorphism given by $Tv_\alpha = w_\beta$. Clearly, expressing this as a sum in the tensor space would require a n infinite sum over either $w_\beta$ or the corresponding dual basis of $v_\alpha$, both of which operation are not defined and thus it cannot be expressed as an element in the tensor.
+When $W$ is infinite dimensional, but $V$ is finite dimensional, we still have an isomorphism. If $V$ is infinite dimensional, the map maps to all those homomorphisms that have a Kernel of cofinite dimension.
+\section*{Problem 3a)}
+For any $k\in \N$, consider set of vectors $u_1,\ldots, u_k \in U$, $v_1,\ldots, v_k\in V$, such that $v_i = T_1u_1$. By the definition of $\Wedge^k T$, we have $T_1(u_1\wedge\cdots\wedge u_k)=T_1u_1\wedge \cdots \wedge T_1u_k=v_1\wedge\cdots\wedge v_k$ and similarly for $T_2$. Thus $T_2(v_1\wedge\cdots\wedge v_k)=T_2v_1\wedge \cdots \wedge T_2v_k = (T_1\circ T_2) u_1 \wedge \cdots \wedge (T_1\circ T_2) u_k = (T_1\circ T_2)(u_1\wedge\cdots\wedge u_k)$ as desired. Since this holds true elementwise for all $k$, it must also hold true for $\Wedge T = \bigoplus_{k\geq 0} \Wedge^k (T_1\circ T_2) = \bigoplus_{k\geq 0} \Wedge^k T_1\circ \Wedge^k T_2 = (\bigoplus_{k\geq 0} \Wedge^k T_1)\circ (\bigoplus_{k\geq 0} \Wedge^k T_1) = \Wedge T_1\circ \Wedge T_2$. The same holds for $S$, by the same proof replacing $\Wedge$ by $S$ everywhere.
+\section*{Problem 3b)}
+Recall that the determinant is just the linear map $\Wedge^n V \to \Wedge^n V$ (where $n$ is the dimension of $V$) given by $\Wedge^n T$, and thus by part a), $det (T_1\circ T_2) = \Wedge^n (T_1\circ T_2) = (\Wedge^n T_1)\circ (\Wedge^n T_2) = (\det T_1)(\det T_2)$ as desired (the last step follows since composition of linear maps on $1$-dimensional spaces, are just multiplications by some factor (namely $\det T$).
+\section*{Problem 3c)}
+We have $\det (S^{-1} \wedge T \wedge S) = \Wedge^n (S^{-1} \circ T \circ S) = \Wedge^n S^{-1} \circ \Wedge^n T \circ \Wedge^n S$. However, these are all just one dimensional vector spaces over $K$ and thus the operators must commute (since composition of operators over one dimensional vector spaces is really just multiplication) and we have $\Wedge^n S^{-1} \circ \Wedge^n T \circ \Wedge^n S =\Wedge^n T \circ \Wedge^n S^{-1} \circ \Wedge^n S = \Wedge^n T$ and thus $\det (S^{-1} \wedge T \wedge S) = \det T$. \par
+In particular, letting $S$ be the canoncial isomorphism with respect to a given basis of $K^n \to V$ , we have $S^{-1}\circ T \circ S = m_A: K^n \to K^n$ so $\det m_A = \det T$.
+\section*{Problem 3d)}
+Consider the space $K^n \times K^n \times \cdots \times K^n$ n-times. This is isomorphic to the $n\times n$ matrices by taking the column vectors. Now, consider the set of all basis vectors of $K^n \Wedge \cdots \Wedge K^n$ which are given by $e_{i_j} \tensor \cdots \tensor e_{i_j}$. Now, consider the map
+\[ v_1\tensor \cdots \tensor v_n \to \sum_{\sigma \in S_k} \prod_{1\leq j \leq n} \langle e_j*,v_{\sigma_j} \rangle \]
+This map will be alternating, since if there are two equal elements, let's say $v_i, v_j$, there exist a permutation obtained by composing the original permutation with a single transposition where the two that will have the same value for $<e_j*,v_{\sigma_j}>$, but with opposite sign due to $\epsilon(\sigma)$. Thus, we have constructed a k-linear alternating map $K^n \times K^n \times \cdots \times K^n \to K$ and thus there must exist a map $\Wedge^n K^n \to K$ that commutes with the map above, so the only possible such map is by scalar multiplication. Since we want the determinant map the identity in $\Wedge^n K^n$ to $1$, there is only one such choice and it is given by the map above (due to the requirement of commutativity of the maps $K^n \times K^n \times \cdots \times K^n \to K$ and $\Wedge^n K^n\to K$).
+\end{document}

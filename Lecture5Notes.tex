@@ -1,0 +1,68 @@
+\include{prelude}
+\begin{term}
+Suppose $(X,d)$ is a metric space $S\subset X$ a subset thereof. 
+\begin{enumerate}
+\item An open cover of $S$ is a collection of open subsets of $X$, $\{ U_\alpha|\alpha \in A\}$ such that $\cup_{a\in A} U_\alpha \supset S$.
+\item A collection of subsets $\{C_\alpha | \alpha \in A \}$ of $x$ has the finite intersection property "FIP" if any finite subcollection of  has a non-empty intersection.
+\item Let $(x_n)_{n\geq 1}$ be a sequence in $X$. Then a subsequence is a sequence of the form $(x_{n_k})$ with $n_1<n_2<\ldots$ 
+\end{enumerate}
+\end{term}
+\begin{mydef}
+$S$ is compact if every open cover of $S$ has a finite subcover. \par
+$S$ is sequentially compact if every sequence $(x_n)$ in $S$ has a subsequence converging to a point in $S$. 
+\end{mydef}
+\begin{thrm}
+For a subset $S\subset X$, the following are equivalent.
+\begin{enumerate}
+\item S is compact
+\item Given any collection of closed subsets of $X$ $\{ C_\alpha | \alpha \in A \}$ such that $\{C_\alpha \cap S | \alpha \in A\}$ has the FIP, then $\cap_{\alpha \in A} (C_\alpha \in S)$ is non-empty.
+\item S is sequentially compact
+\end{enumerate}
+\end{thrm}
+\begin{rem}
+\item In effect we we have two definitions of compactness
+a) as stated ("extrinsic") \par
+b) $S$ as a subset of $(S,d|_s)$ ("intrinsically defined")\par 
+They are the same as follows from the following observation:\par 
+A subset $T\subset S$ is open with resepect to $(S,d|_s)$ if and only if there exists a an open subset $U\subset X$ s.t. $U\cap S=T$.
+\begin{proof}
+\biu{$\so$} Suppose $T\subset S$ is open with resepect to $(S,d|_s)$. Then for each $t\in T$, there exists $\epsilon_t >0$ such that $B_S(t,\epsilon_t)\subset T$. Then $U=\cup_{t\in T} B_X(t,\epsilon_t)$ is open in $X$ and $U\cap S=T$.
+\biu{$\onlyif$} Suppose $U\subset X$ is open and $U\cap S=T$. Then for each $t\in T$, there exists $\epsilon_t>0$ s.t. $B(t,\epsilon_t)\subset U$. Then $U \cap S = \cup_{t\in T} B_s(t,\epsilon_t) = T$.
+\end{proof}
+\item The definition of compactness, sequential compactness make sense in any topological space, but the implication that sequential compactness $\so$ compactness does not hold in general:
+\end{rem}
+\begin{proof}
+$1) \Leftrightarrow 2)$ holds true for formal reasons:
+There exists a bijectiion between open subsets $U_\alpha \subset X$ and closed subsets $C_\alpha\subset X$, Given by $U_\alpha = X-C_\alpha$. Then,\par
+$\{U_\alpha|\alpha\in A\}$ is an open cover $\Leftrightarrow \cap_{\alpha\in A} (c_\alpha \cap S) = \emptyset$ \par 
+$\{ U_\alpha | \alpha \in A\}$ has no finite subcover $\Leftrightarrow \{C_\alpha \cap S|\alpha\in A\}$ has the FIP. \par 
+So 2) is the contrapositive of 1)\par
+1) $\so$ 3). Let $(x_n)_{n\geq 1}$ be a sequence in $S$. Suppose there exists $x_\infty \in S$ such that for every $\epsilon>0$, $B(x_\infty,\epsilon)$ contains $x_n$ for infinitely many $n$. Then we can choose $(n)$ s.t.
+\[ x_{n_1} \in B(x_\infty,1) \]
+\[ x_{n_2} \in B\left(x_\infty,\frac{1}{2}\right) \]
+\[ x_{n_k} \in B\left(x_\infty,\frac{1}{k}\right)\]
+Then $\limk x_{n_k} = x_\infty$. \par 
+If, On the other hand for each $x\in S, \exists \epsilon_x> 0$ such that $B(x,\epsilon_x)$ contains $x_n$ for  only finitely many $n$. Then, by compactness finitely many of the $B(x,\epsilon_x)$ cover $S$ and since $S$ contains $x_n$ for all $n$, at least one of the finitely many balls must contain infinitely many $x_n$ (infinitely many elements in finitely many balls). \biu{Contradiction}.
+Therefore one must always be be able to find a subsequence by the former method. \par 
+3) $\so$ 1) Will be a consequence of 3 lemmas
+\end{proof}
+\begin{mydef}
+A subset $S \subset X$ is totally bounded if, for each $\epsilon>0$, there exists a finite subset $\{x_1,\ldots,x_n\}\subset S$. s.t. $\cup_{1\leq k \leq N} B(x_k,\epsilon) \supset S$. 
+\end{mydef}
+\begin{mydef}
+S is countably compact if any countable open cover has a finite subcover.
+\end{mydef}
+\begin{lemma}
+If $S$ is sequentially compact, then $S$ is totally bounded. 
+\begin{proof}
+Suppose $S$ is sequentially compact and $\epsilon>0$ given.
+\begin{claim}
+There cannot exist a sequence $(x_n)_{n\geq 1}$ in $S$ s.t. $B(x_n,\frac{\epsilon}{2}) \cap B(x_m,\frac{\epsilon}{2}) \cap S \neq \emptyset$ for all $n\neq m$
+\begin{proof}
+Suppose otherwise. Going to a convergent (in $S$) subsequence, without changing notation, we may suppose $x_n\to x\infty \in S$. Then $B(x_\infty,\frac{\epsilon}{2})$ must contain all but finitely many $x_n$ and therefore $x_\infty \in B(x_n,\frac{\epsilon}{2})$ for infinitely many $n$. Therefore $B(x_m,\frac{\epsilon}{2})\cap B(x_m,\frac{\epsilon}{2})$ contains $x_\infty$ for some $m\neq n \so$ Claim.
+\end{proof}
+\end{claim}
+\end{proof}
+\end{lemma}
+
+\end{document}

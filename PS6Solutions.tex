@@ -1,0 +1,84 @@
+\title{Math 55: Problem Set 6}
+\include{prelude}
+\maketitle
+\section*{Problem 1}
+\subsection*{Only if}
+\begin{proof}
+Let $X$ be a compact topological space and let $(S,D,\geq)$ be a net on $X$. Assume that there exists no convergent subnet. \par 
+Now, for any $x\in X$, there must exists a neighborhood $N_x$ such that $S(d)\in N_x$ for only finitely many $d\in D$ (for otherwise $x$ would be a cluster point of $(S,D,\geq)$ and thus have a subsequence converging to it, which it does not by assumption). 
+Now, the collection $B=\{N_x | x\in X\}$ is an open cover of $X$ and since $X$ is compact, there must exist some finite subcover $A$ made up of elements $N_{x_1}, ..., N_{x_N}$. 
+However, for each of these $N_{x_n}$, there exist only finitely many $d\in D$ such that $d\in N_{x_n}$ and thus there are only finitely many $d$ in $A$, but since N covers all of $X$, we must have $S(D)$ be finite. However, since $(S,D,\geq)$ does not have any cluster points $S(D)$ must be infinite and thus we have a \biu{contradiction}.
+\subsection*{If}
+Let $X$ be a topological such that every net on $X$ has a convergent subnet. Now assume that there exists some open cover $U=\{U_\alpha | \alpha\in A\}$ that does not have a finite subcover. Now, let $D$ be the set of all finite subcollections of $U$. Now, for all $d\in D$, we may find $x_d$ such that $x_d$ is not an element of any of the sets in $d$. Let $D$ be a directed system by set inclusion and let $S(d) = x_d$. Consider the net $(S,D,\geq)$. Now, for each $x\in X$ and some neighborhood $N_x$ of $X$, we can find $U_\beta$ such that $N_x \subset U_\beta$. However, by the construction of the net, there cannot be any $d\in D$, such that $d\geq \{U_\beta\}$, but $S(d)\in U_\beta \geq N_x$ and thus $x$ cannot be a cluster point of the net and we have found a net that has no convergent subnet. This is a \biu{Contradiction} and we are done. 
+\end{proof}
+\section*{Problem 2}
+\subsection*{a)}
+\begin{lemma}
+$U_{K_1 \cup K_2,\epsilon} \subseteq U_{K_1,\epsilon}\cap U_{K_2,\epsilon}$
+\begin{proof}
+We have $U_{K_1 \cup K_2,\epsilon}=\{ f\in C(X) | \sup_{k\in K_1\cup K_2} |f(k)| < \epsilon \}$. Now $\sup_{k\in K_1\cup K_2} |f(k)| = \max\{\sup_{k\in K_1}|f(k),\sup_{k\in K_2}|f(k)|\}$ and thus if $\sup_{k\in K_1\cup K_2} |f(k)|<\epsilon$ (i.e. $f\in U_{K_1 \cup K_2,\epsilon}$, we must have $\sup_{k\in K_1} |f(k)|<\epsilon$ and $\sup_{k\in K_2} |f(k)|<\epsilon$ and thus $f\in U_{K_1,\epsilon}$ and $f\in U_{K_2,\epsilon}$ as desired. 
+\end{proof}
+\end{lemma}
+To show that the sets $V_{f,K,\epsilon}$ are a base of some topology on $C(X)$, the following are necessary and sufficient conditions:
+\begin{enumerate}
+\item The sets $V_{f,K,\epsilon}$ span $C(X)$
+\begin{proof}
+For each $f\in C(X)$, consider $V_{f,\emptyset,\epsilon}$. Clearly, we have $U_{\emptyset,\epsilon} = C(X)$ (since $\emptyset$ is compact, since $\sup \emptyset = -\infty$ and thus sets $V_{f,K,\epsilon}$ span $C(X)$.
+\end{proof}
+\item For any two $V_{f_1,K_1,\epsilon_1}$, $V_{f_2,K_2,\epsilon_2}$ and for each $i\in V_{f_1,K_1,\epsilon_1} \cap V_{f_2,K_2,\epsilon_2}$, there exists some $V_{f_i,K_i,\epsilon_i}$ such that $V_{f_i,K_i,\epsilon_i} \subseteq V_{f_1,K_1,\epsilon_1} \cap V_{f_2,K_2,\epsilon_2}$.
+\begin{proof}
+Let $V_{f_1,K_1,\epsilon_1}$, $V_{f_2,K_2,\epsilon_2}$ be two elements of our prospective base. First consider the case in which 
+$f=f_1=f_2$. We will prove that $W=V_{f,K_1\cup K_2,\min \epsilon_1,\epsilon_2}$ satisfies 2). For that consider any $h\in W$. Clearly $h$ is of the form $f+g$, where $g\in U_{K_1\cup K_2,\min \epsilon_1,\epsilon_2}$. However, note that by Lemma 1 this implies that $h$ is in both of the original elements of the base (\biu{Note:} This proof that the sets $V_{f,K,\epsilon}$ for $f$ fixed and $\forall K, \epsilon$ are a neighborhood basis of $f$). \par
+Now consider the case where $f_1\neq f_2$. Then if $V_{f_1,K_1,\epsilon_1} \cap V_{f_2,K_2,\epsilon_2} = \emptyset$ we are done. Otherwise, for each function $i$ in the intersection, consider 
+$V_{i,K_1\cup K_2, \min \epsilon_1-|i-f_1|,\epsilon_2-|i-f_2|}$. We need to show that this is a subset of both $V_{f_1,K_1,\epsilon_1}$ and $V_{f_2,K_2,\epsilon_2}$. To show this, we we just need to show that any element $x$ is less than $\epsilon_1$ from $f_1$ and less than $\epsilon_2$ from $f_2$ the (If this is true, the difference in $K$'s is trivial by Lemma 1). Now for $f_1$, we know that $\epsilon_i \leq \epsilon_1-|i-f_1|$.
+ Furthermore since $x\in V_{i,K_1\cup K_2, \min \epsilon_1-|i-f_1|,\epsilon_2-|i-f_2|}$, $|x-i|<\epsilon_i$. Therefore $|x-i| \leq \epsilon_1-|i-f_1|$. And thus $|x-i|+|i-f_1|<\epsilon_1$. Using the triangle inequality in reverse: $|x-i+i-f_1|=|x-f_1|<\epsilon_1$ as desired. The case for $f_2$ follows in the same way.
+\end{proof}
+\end{enumerate}
+We have thus proved that the sets $V_{f,K,\epsilon}$ constitute a base of a topological space on $C(X)$.  We have already proved above that $V_{f,K,\epsilon}$ for some fixed $f$ is the neighborhood base of that $f$. Thus $V_{0,K,\epsilon} =\{g | g\in U_{K,\epsilon} \} = U_{K,\epsilon}$ is a neighborhood base for $0$. 
+\subsection*{b)}
+Let $(S,D,\geq)$ be a Cauchy net in $C(X)$. Then for every neighborhood $U$ of $0$, there exists $n_0\in D$ s.t. $n,m \geq  n_0 \so S(n)-S(m)\in U$. Now assume that $(S,D,\geq)$ does not converge. Then for all $x_0\in C(X)$, there exists some open neighborhood $U_{x_0}$ of $0$ such that $S(n)-x_0 \notin U_{x_0}$ for infinitely many $n$ greater than any $n_0$ (Note that $U_{x_0}$ does not depend on $n_0$. Since $U_{x_0}$ is open, it must contain some base element $U_{K,\epsilon}$ of the neighborhood basis of basis of $0$. Then we have $S(n)-x_0\notin U_{K,\epsilon}$ for infinitely many points $n$ greater than any $n_0$. However, since $S(n)$ is Cauchy, we know that there must exist some $n_0$ such that $m\geq n_0 \so S(m) \in V_{S(n_0),K,\epsilon}$ so for $x_0\in V_{S(n_0),K,\epsilon}$ we have $S(n)-x_0\in U_{K,\epsilon}$. \biu{Contradiction}
+\subsection*{c)}
+Recall that open sets in the product topology are the Cartesian product of all open sets with all other open sets (i.e. $A$ and $B$ are open iff $A\times B$ is open). 
+\subsubsection*{Addition}
+Let $A$ be any open set in $C(X)$. To show that addition is continuous is suffices to show that it is continuous for the basis elements. Thus, let $V_{f,K,\epsilon}$ be an element of the basis.  Now, for every $g\in C^(1)(X)$, we can find a unique $f-g\in C^(2)(X)$ and with it  basis elements $V_{g,K,\epsilon/2}$, $V_{f-g,K,\epsilon/2}$ and thus an open set $V_{g,K,\epsilon/2}\times V_{f-g,K,\epsilon/2}\in C(X)\times C(X)$. Note that there are no other combinations possible that map to $f$. Thus, since the inverse image is union of open sets, it must be open and thus addition is continuous. 
+\subsubsection*{Multiplication}
+Let us again consider a basis element $V_{f,K,\epsilon}$. 
+Now, let $g\in C^*(X)$, then we can find a unique $h=\frac{f}{g} \in C(X)$. Thus we want to find open sets of the form $V_{g,K,\epsilon_g}$, $V_{h,K,\epsilon_h}$ for some $\epsilon_g$, $\epsilon_h$ that we need to find. To do so, consider $a\in V_{g,K,\epsilon_g}$ and $b\in V_{h,K,\epsilon_h}$. From hereon we will write function as $a$ instead of $a(x)$ with the understanding that this must hold true for all $x\in K$ We need that 
+\[ |ab - f| = |ab-gh| \leq |\epsilon| \]
+Now 
+\[ |ab - gh| = |ab - ah + ah - gh| \leq |ab - ah| + |ah-gh| = |a||b-h| + |h||a-g| \leq (|g|+\epsilon_g)\epsilon_h + |h| \epsilon_g \]
+Now let $\epsilon_h = \min \{1, \epsilon, \frac{\epsilon}{|g|} \}$ and let $\epsilon_g = \min \{1, \epsilon, \frac{\epsilon}{|h|} \}$, we get
+\[ \leq 2\epsilon + \epsilon_h\epsilon_g \leq 3\epsilon \]
+which is as good as $\epsilon$.
+Thus $\cup_{g\in C(X)} V_{g,K,\epsilon_g}\times V_{\frac{f}{g},K,\epsilon{h}}$ is an the inverse image and an open set and thus multiplication in continuous.
+\subsubsection*{Reciprocal}
+Let us again consider a basis element $V_{f,K,\epsilon}$. However, this time note that we must have $f\neq 0$ and $|f(x)|> \epsilon \forall x$ due to the restricted topology. 
+Now, all function $y\in C(X)$ in the inverse image will satisfy:
+\[ |\frac{1}{y(x)}-f(x)| \leq \epsilon \]
+Now, consider
+\[ \left| b(x) - \frac{1}{f(x)} \right| = \left| \frac{1}{a(x)} - \frac{1}{f(x)} \right| = \left|\frac{f(x) - a(x)}{a(x)f(x)} 
+\right| = \frac{1}{|a(x)f(x)|}\left|\frac{1}{b} (x) - f(x)\right| \]
+Thus all we need to verify is that $\frac{1}{|a(x)f(x)|}$ is bounded below. This is clearly true by the restricted topology as $a\in V_{f,K,\epsilon}$. Then clearly both $0 < f(x)-\epsilon < a(x), f(x)$ for all $x$ and thus we are done.
+\subsection*{d)}
+Let $A$ be an open set in $C(X)$. Then $A$ can be written as the union of sets of the form $V_{f,K,\epsilon}$. Thus to show that $F^*$ is continuous is suffices to show that the inverse image on any basis element is open (since unions pass through maps as proven in a previous problem set). \par
+Thus consider
+\[ (F^*)^{-1}(V_{f,K,\epsilon}) \]
+We are thus looking for function $y\in C(Y)$ such that
+\[ F^* y = y\circ F \in  V_{f,K,\epsilon} \]
+This is true if
+\[ y\circ F \in \{ f+g| g\in U_{K,\epsilon} \}\]
+and in particular if
+\[ |(y\circ F)(k)| \leq |f(k)|+\epsilon \]
+for all $k\in K$. Now $M=F^{-1}(K)$ is a compact set in $Y$. 
+\[ |y(m)| \leq |f(F(m))| + \epsilon \] 
+\[ (|y|-|f\circ F|) \leq \epsilon \]
+for all $m\in M$,
+which happens to be equivalent to the basis element 
+\[ V_{f\circ F, K, \epsilon} \] 
+which is an open set in $C(Y)$ and thus $F^*$ is continuous. 
+\section*{Problem 3}
+We will first construct a bijection between $S^n$ and the one-point compactification of $\R^n$ and then go on to prove that the map is a homeomorphism.  \par
+
+Let $x\in S^n$ be any point on the sphere. For convenience, but without loss of generality, assume $x=(0,0,0,\ldots,0,1)$. Now consider $S^n-{x}$ with the map $F: (S^n-{x}) \to R^n$ such that $X_i = \frac{x_i}{1-x_{n+1}}$ for $1\leq i \leq n$ where the $X\in \R^n$ and $x$ is the Cartesian coordinate on $S^n\subset \R^{n+1}$. $F$ is clearly injective as every coordinate in $\R^n$ depends on every coordinate in $S^n$ due to the constraint connecting $x_{n+1}$ and all other $x_i$. Now consider the inverse function given by $G: \R^n \to S^n-{x}$ such that $x_i = \frac{2 x_i}{1+\sum_{j=1}^n x_j^2}$ for $1\leq i \leq n$ and 
+$x_{n+1} = \frac{-1+\sum_{j=1}^n x_j^2}{\sum_{j=1}^n x_j^2}$. Clearly this map is injective as well and thus there must exist a bijection between the two. Using this set bijection, we define the open sets on $S^n-{x}$ to be the image of the open sets on $\R^n$ under the bijection. Clearly this means that $\R^n$ is homeomorphic to $S^n-{x}$. Now adding $x$ back via one-point compactification, we obtain $S^n$ (with the new notion of open sets defined by the compactification). However, notice that since the notion of cocompact set is the same on $S^n-{x}$ and $\R^n$ and the additional open sets depend only on that $S^n$ must be homeomorphic to the one-point compactification of $\R^n$.
+\end{document}

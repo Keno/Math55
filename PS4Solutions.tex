@@ -1,0 +1,185 @@
+\title{Math 55: Problem Set 4}
+\include{prelude}
+\maketitle
+\section*{Problem 1a)}
+Consider addition and multiplication as maps from $\C^2$ to $\C$ . Note that we may indentify $\C$ with $\R^2$ and we will use the product metric on $\R^2$ as the metric on $\C$. In particular, for two complex numbers $a=c+di$,$b=e+fi$, we will say $d(a,b) = |c-e| + |d-f|$ and the metric on $\C^2$ will just be the product metric on that (which is also equivalent to the product metric on $\R^4$).  \par 
+Before beginning the proof, recall the $\epsilon-\delta$ definition of continuity. In particular we need to proof for a map $F$: \par 
+For every $x_0 \in \C^2$ and every $\epsilon>0$, there exists $\delta>0$ such that $d_{\C^2}(x,x_0)<\delta$ implies $d_{C}(F(x),F(x_0))<\epsilon$. \par
+\biu{Addition:} 
+\begin{proof}
+Let $x_0=(a_0,b_0)\in C^2$, $a_0=c_0+d_0i$,$b_0=e_0+f_0i$ and let $\epsilon>0$. 
+For any $x\in \C^2$ (where the individual components are written as for $x_0$ except for the subscript)
+\[ d_{\C}(F(x_0),F(x))=d_{\C}(a_0+b_0, a+b) = |c_0+e_0-c-e| + |d_0+f_0-d-f| \]\[\leq |c_0-c| + |e_0-e| + |d_0-d| + |f_0-f| = d_{\C^2}(x_0,x) \].
+We may now set $\delta = \epsilon$ and thus $+$ is continuous as a map from $\C^2\to \C$.
+\end{proof}
+\biu{Multiplication:}
+\begin{proof}
+Let $x_0\in \C^2$ and let $\epsilon$. For any $x\in \C^2$, with the same notation as above, we get:
+\[ d_{\C}(F(x_0), F(x)) = d_{\C}(a_0b_0, ab) = d_{\C}(c_0e_0-d_0f_0+(c_0f_0+e_0d_0)i,ce-df+(cf+ed)i) \]
+\[ = |c_0e_0-d_0f_0-ce+df| + |c_0f_0+e_0d_0-cf-ed| \] 
+Now let $\Delta c = c-c_0$, and so on for $\Delta d,\Delta e,\Delta f$ and note that we must find $\delta$
+such that $|\Delta c| + |\Delta d| + |\Delta e| + |\Delta f|< \delta$ implies $d_{\C}(F(x_0), F(x))<\epsilon$. Writing the above equation in terms of the $\Delta$'s, we get
+\[ = |c_0e_0-d_0f_0-(c_0+\Delta c)(e_0+\Delta e)+(d_0+\Delta d)(f_0+\Delta f)|\]\[ +
+|c_0f_0+e_0d_0-(c_0+\Delta c)(f_0+\Delta f)-(d_0+\Delta d)(e_0+\Delta e)| \]
+ \[ |c_0\Delta e + e_0\Delta c+ \Delta e\Delta c + d_0\Delta f + f_0\Delta d+ \Delta d\Delta f| + |c_0\Delta f + f_0\Delta c+ \Delta f\Delta c + d_0\Delta e + e_0\Delta d+ \Delta e\Delta f| \]
+ Now, we can easily see how to proceed. Let
+ \[ \delta = \frac{1}{12}\min(\sqrt{\epsilon}, \frac{\epsilon}{|c_0|}, \frac{\epsilon}{|d_0|}, \frac{\epsilon}{|e_0|}, \frac{\epsilon}{|f_0|}) \]
+ Now note that every $\Delta$ needs to be less than this $\delta$ and that $\delta^2\leq \epsilon$ and thus we may write 
+ \[
+ \leq \frac{1}{12}[((\epsilon+\epsilon+\epsilon)+(\epsilon+\epsilon+\epsilon))+((\epsilon+\epsilon+\epsilon)+(\epsilon+\epsilon+\epsilon))
+ =\epsilon\].
+ Thus $\cdot$ as a map from $\C^2$ to $\C$ is continuous. 
+\end{proof}
+\section*{Problem 1b)}
+Let $F:\{pt\}\to \C$ be the map as given in the problem. Let $X$ be any closed set in $\C$. Now, if $c\in X$, $F^{-1}(X) = \{pt\}$ and of $c \notin X$, $F^{-1}(X) = \emptyset$. Thus in both cases, the inverse image of a closed set is closed and $F$ must be continuous.
+\section*{Problem 1c)}
+\begin{lemma}
+Given two continuous map $F: X\to Y$ and $G: Y\to Z$, their composition $(G\circ F)$ is continuous. 
+\begin{proof}
+Let $A$ be any open set in $Z$. Then since $G$ is continuous $G^{-1}(A)$ is an open set in $Y$ and thus $F^{-1}(G^{-1}) = (G \circ F)^{-1}(A)$ is an open set and thus $G\circ F$ must be continuous. 
+\end{proof}
+\end{lemma}
+\begin{lemma}
+Given a map $F: X\to Y$, the following holds for $A_i\in X$, $C_i \in Y$, where $F(X)$ denotes the image of $X$ in $Y$ under $F$ and $F^{-1}(Y)$ denotes the inverse image of $Y$ in $X$.
+\begin{enumerate}
+\item $F(\cup_{i\in I} A_i) = \cup_{i\in I} F(A_i)$
+\begin{proof}
+Let $x$ be any element in $F(\cup_{i\in I} A_i)$, then there exists  $y\in \cup_{i\in I} A_i$ such that $F(y) = x$. Now $y$ must lie in at least on of the $A_i$ and thus  $x=F(y)\in F(A_i) \subset  \cup_{i\in I} F(A_i)$.
+\end{proof}
+%\item $F(A\cap B) \subseteq F(A)\cap F(B)$
+\item $F^{-1}(\cup_{i\in I} C_i) = \cup_{i\in I} F^{-1}(C_i)$
+\begin{proof}
+Let $A_i$ be the largest subset of $Y$ such that $F(A_i)\subseteq C_i$. Then $F^{-1}(\cup_{i\in I} C_i) = F^{-1}(\cup F(A_i)) = F^{-1}(F(\cup A_i)) = \cup A_i = \cup F^{-1}(C_i)$
+\end{proof}
+\item $F^{-1}(\cap_{i\in I} C_i) = \cap_{i\in I}  F^{-1}(C_i)$
+\begin{proof}
+Let us consider each $C_i$ as the union of two disjoint sets: Elements that are in each $C_i$, $A_i$ and elements that are in some, but not all $C_i$, $B_i$.
+Now $F^{-1}(\cap_{i\in I} C_i) = F^{-1}(A_i)$, and $\cap_{i\in I}  F^{-1}(A_i\cup B_i) = \cap_{i\in I}  (F^{-1}(A_i) \cup F^{-1}(B_i)) =    \cap_{i\in I} F^{-1}(A_i) \cup  \cap_{i\in I} F^{-1}(B_i))$. Thus we must show that $\cap_{i\in I} F^{-1}(B_i)) = \emptyset$. However this is clearly true as each $B_i$ is disjoint with some other $B_i$ and no element in $X$ can map to two different values in $Y$, thus establishing the desired result. 
+\end{proof}
+\end{enumerate}
+\end{lemma}
+\begin{lemma}
+For arbitrary product spaces $X:=\prod X_\alpha$,$Y:=\prod Y_\alpha$,  a map $F:X \to Y$ if $F_\alpha: X_\alpha \to Y_\alpha$ is continuous where $F=\prod F_\alpha$. 
+\begin{proof}
+Let $B$ be a basis for $Y$, and let $A\in Y$ be any open set.
+Then we may write
+\[ A = \cup_{\beta \in C} B_\beta \]
+Furthermore each $B_\beta$ can be written as a finite intersection of elements in the subbasis of the product topology as follows
+\[ =  \cup_{\beta \in C} \cap_{j=0}^{N_\beta} P_{\alpha_{\beta j}}^{-1} (U_{\alpha_{\beta j}}) \]
+where each $(U_{\alpha_{\beta j}})$ is an open set in $X_{\alpha_{\beta j}}$. Now 
+\[ F^{-1} (A) = F^{-1}(\cup_{\beta \in C} \cap_{j=0}^{N_\beta} P_{\alpha_{\beta j}}^{-1} (U_{\alpha_{\beta j}})) \]
+\[ = \cup_{\beta \in C} \cap_{j=0}^{N_\beta} F^{-1}(P_{\alpha_{\beta j}}^{-1} (U_{\alpha_{\beta j}}))) \]
+Now note that one may say $F^{-1}(P^{-1}_{\alpha_{\beta j}}) = P^{-1}_{\alpha_{\beta j}}(F^{-1}_{\alpha_{\beta j}}$ (this is because the components for all $X_\alpha$ but $X_{\alpha_{\beta j}}$ will be all of $X_\alpha$, since $F_\alpha^{-1}(Y_\alpha) = X_\alpha$ - the same result as would be obtained if the projection was taken after the map). 
+
+We thus have that for any open set $A$ in $Y$
+\[ F^{-1}(A) = \cup_{\beta \in C} \cap_{j=0}^{N_\beta} P_{\alpha_{\beta j}}^{-1} (F_{\alpha_{\beta j}}^{-1}(U_{\alpha_{\beta j}}))) \]
+Now note that since all the intersections are finite intersections of open sets and we just take the union over these $F^{-1}(A)$ must be open and thus $F$ must be continuous. 
+\end{proof}
+\end{lemma}
+
+%\begin{lemma}
+%The projection maps from a product space to the individual component space is an open map (i.e. it maps open sets to open sets). 
+%\begin{proof}
+%Each projection $P_\alpha$ is continuous by definition. We will show that the same is true for the inverse. 
+%Let $A\in X$ be an open set and let $B$ denote a basis of $X$. Then, since $A$ is open it is the union of elements of the basis $B_i$. Thus we may write
+%\[ P(A) = P\left(\bigcup_{i\in I} B_i\right) = \bigcup_{i\in I} P(B_i) \]
+%Now by the definition of the basis, each element of the basis is the Cartesian product of some open set $U_\alpha$ in $X_\alpha$ and open sets in all the other component spaces (where all but finitely many of those are equal to the entire component space). Thus each $P(B_i)$ must be an open set in $X_\alpha$ and thus their union must be an open set as well. Thus $P$ is an open map. 
+%Now, each $B_i$ is the intersection of finitely many elements in the subbasis used to define product topology:
+%\[ P(B_i) = P\left(\bigcap_{j\in J_i} C_{ij} \right) = P\left(\bigcap_{j\in J_i} P_{\alpha_{ij}}^{-1}(U^\alpha_{ij}) \right) = P\left(\bigcap_{\alpha \in A} \bigcap_{j\in J_i, \alpha_{ij} = \alpha} P_{\alpha_{ij}}^{-1}(U^\alpha_{ij}) \right) \]
+%\[ = \cap U_{ij}^\alpha \]
+%which is a finite intersection of open sets in in $Y$ and must thus be finite.
+%\end{proof}
+%\end{lemma}
+\begin{proof}[Proof of the problem]
+
+This follows immediately from Lemma 3. 
+
+\end{proof}
+\section*{Problem 1d)}
+To prove topological isomorphism, we need to find a bijective map that is  continous and that has a continuous inverse.
+\begin{proof}
+ Note that both the projection map $p_X$ and its inverse are injective since there's only one element in ${pt}$. Furthermore, $p_X$ is continuous, and in this case so is $P_X^{-1}$ since $P_X$ is an open map and  $P_X^{-1}$ is injective. 
+\end{proof}
+\section*{Problem 1e)}
+Let $\epsilon>0$ and let $\delta=\min(\frac{|z_0|}{2},\frac{\epsilon |z_0|^2}{2})$. 
+Now, for $z_0\in \C$, we have
+\[ \left| \frac{1}{z_0} - \frac{1}{z} \right| = \frac{|z_0 - z|}{|z_0z|}  \leq \frac{\delta}{|z_0||z|} \]
+Now, since since $|z_0 - z| < \frac{|z_0|}{2}$, we must have $Re[\frac{z_0}{2}]<Re[z_0 - z]<Re[\frac{3z_0}{2}]$ and $Im[\frac{z_0}{2}]<Im[z_0 - z]<Im[\frac{3z_0}{2}]$. This implies that $\frac{|z_0|}{2}<|z|$ and thus we may write 
+\[ \frac{\delta}{|z_0||z|}  < \frac{2\delta}{|z_0|^2} \leq \epsilon \]
+and thus the map is continuous. 
+\section*{Problem 1f)}
+Let $z_0\in C$, $\epsilon>0$. Then, let $\delta = \epsilon$
+\[ ||z_0|-|z|| = ||z_0-z+z|-|z|| \leq  ||z_0-z| + |z|- |z||=||z_0-z||\leq \delta = \epsilon \]
+\section*{Final Deduction}
+$z\to p(z)$ is true, because $\C$ is closed under addition and multiplication as shown in 1a), $z\to |p(z)|$ is just a composition of the absolute value (which is a continuous map by 1f) ) and the first case, so it must be continuous by Lemma 1. For the third case first note that $z\to \frac{1}{q(z)}$ is a continuous map by the first case and 1). Furthermore, the map $f: \C \to \C$, $f(z)=(z,z)$ and thus the composition of $f$ with $(z\to p(z))\times(z\to\frac{1}{q(z)})$ (cont. by 1c) and multiplication (cont. by 1a) is cont. by Lemma 1. 
+\section*{Problem 2a)}
+Let $x_1, x_2 \in \R$ be any two points on the real number line. Then, for all neighborhoods $U$ and $V$ of $x_1$, and $x_2$ respectively, we must have $U \cap V = X-((X-U)\cup(X-V))$. However, since the topology is cofinite, $X-U$ and $X-V$ must be finite and thus $U \cap V$ must be infinite for all neighborhoods $U$ and $V$ and can therefore not be empty and not Hausdorff.
+\section*{Problem 2b)}
+A sequence $x_n$ under $\mathcal{T}_{cof}$ converges if there is at most one $x\in \R$ for which, there exist infinitely many $n$ such that $x_n=x$. 
+\begin{proof}
+(The problem didn't specify whether or not to proof that the given characterization is correct - this proof is not part of the characterization.) \par
+
+First assume that there is multiple $y_i\in \R$ (say in particular, we have $y_1, y_2$, with $y_1\neq y_2$ for which infinitely many elements $x_n = y_1$ and infinitely many $x_n=y_2$ for which a sequence converges. Now consider the open neighborhood of any $y\neq y_2$ given by $\R-\{y_2\}$, clearly, there cannot exists an $N$ such that $n>n$ implies that $x_n \in \R-{y_2}$ and thus $x_n$ cannot converge to any $y$ but $y_2$. However, considering the open neighborhood $\R-\{y_1\}$ of $y_2$, we see that the sequence can also not converge to $y_2$ and thus it does not converge. Contradiction. \par
+
+Now assume that there exists at one such $y$, but $x_n$ does not converge. Let $B=\R-S$ be any open neighborhood of $y$, where $S$ is a finite set not containing $y$. Then clearly, there are at most finitely many elements of $(x_n)$ in $S$ and thus we may choose $N$ such that for all $n>n$, $x_n\notin S$ and thus $(x_n)$ converges to $y$. \par 
+
+Now assume that there exists no such $y$, for all $y\in \R$ apply the argument above and thus $x_n$ converges to all of $\R$. 
+\end{proof}
+\section*{Problem 2c)}
+All functions from the cofinite topology to the regular topology that map to the same value $c\in\R$ for all elements of the domain.
+\begin{proof}
+(Again not part of the characterization) \par 
+Suppose the function is not constant, then one may find two points of the in the range of a function that have non-intersection open neighborhoods. However the inverse image, both of these open neighborhoods must be cofinite sets that do not intersect which is clearly not possible. Contradiction. 
+\end{proof}
+\section*{Problem 3a)}
+\begin{lemma}
+$\Q_p$ is a locally compact Hausdorff space. 
+\begin{proof}
+First note that any metric space (such as $\Q_p$) is Hausdorff.  Now, for any $x\in \Q_p$, the closed ball $\overline{B(x,1)}$, whose interior is an open subset containing $x$. Now for any $n$ we may find finitely many $B(x,\frac{1}{n})$ that cover $\overline{B(x,1)}$. Thus $\overline{B(x,1)}$ is a totally bounded, closed subset of the complete space $\Q_p$ and must thus be compact. 
+\end{proof}
+\end{lemma}
+\begin{lemma}
+The union of locally compact subsets of space is locally compact. 
+\begin{proof}
+Let $X=\cup_{a\in A} X_\alpha$ where each $X_\alpha$ is locally compact. Now, for any $x\in X$, there exists $\alpha$, such that $x\in X_\alpha$ and thus there exists a compact neighborhood in $X_\alpha \subset X$ and thus $X$ is locally compact. 
+Note in particular that this implies that if $X$ is all of the space, the space if locally compact. 
+\end{proof}
+\end{lemma}
+\begin{lemma}
+The product space of finitely many locally compact spaces is locally compact. 
+\begin{proof}
+Let $X=\prod_{i=0}^n X_i$ where each $X_i$ is a locally compact space. Now let $x\in X$ be any point in $X$. Then, for each $i$, we may find a compact neighborhoods $B_i$ of $P_i(x)$. 
+Let $B = \cap P^{-1}(B_i)$ which is an open set in $X$ since it's an intersection of finitely many open sets in $X$. Now, Let $U$ be any open cover in of $B$ in $X$. Then the image of $U$ under each $P_i$ is an open cover of the compact neighborhood $B_i$. Now, for each i, there must exists finitely many elements $U_\alpha$ of $U$ such that $P_i(U_\alpha)$ cover $B_i$. Now, taking the finite union of these finitely many elements yields a finite subcover of $U$ and thus $B$ must be compact. And since this can be done for any $x\in X$, $X$ is locally compact. 
+\end{proof}
+\end{lemma}
+\begin{lemma}
+Each $\mathbb{A}_S$ is a locally compact Hausdorff space. 
+\begin{proof}
+We have proved in lecture that the product topology is Hausdorff if and only if each component space is Hausdorff. Now, note that each component space is a metric space (and thus Hausdorff and thus $\mathbb{A}_s$ must be Hausdorff. 
+First note that since $S$ is finite and since all $\Q_p$ are locally compact,
+\[ \prod_{p\in S} \Q_p \]
+is locally compact by Lemmas 4 and 6. 
+Furthermore 
+\[ \prod_{p\notin S} \Z_p \]
+is the product topology of infinitely many compact spaces, which must be compact (and thus locally compact) by Tychonoff's theorem.
+Now, $R$ is locally compact as well (just consider any closed interval around the desired point) and thus we have $\mathbb{A}_S$ as the following product of three locally compact spaces:
+\[ \mathbb{A}_S = \R\times\prod_{p\in S} \Q_p \times \prod_{p\notin S} \Z_p \]
+which must again be locally compact by Lemma 6. 
+\end{proof}
+\end{lemma}
+\begin{proof}
+Since each $\mathbb{A}_S$ is locally compact and since the union of spaces is compact by Lemma 5, $\mathbb{A}$ must be locally compact. 
+\end{proof}
+\section*{Problem 3b)}
+\begin{lemma}
+The algebraic operations of $\Q_p$ and $\R$ are continuous
+\begin{proof}
+The algebraic operations on $\Q$ and $\R$ are continuous, because they are closed over these fields and they are subsets of $\C$ on which the operations are continuous by Problem 1a). 
+The algebraic operation on $\Q_p$ as maps from $\Q_p\times \Q_p$ to $\Q_p$ are continuous by the sequence definition of continuity, since we defined the algebraic operations  on $\Q_p$ in terms of convergent two sequence in $\Q_p$ which is equivalent to a convergent sequence in $\Q_p\times \Q_p$.
+\end{proof}
+\end{lemma}
+\begin{proof}
+Consider addition and multiplication as maps from $\mathbb{A} \times \mathbb{A} \to \mathbb{A}$ with each operation applied elementwise. Now, let $X_\alpha$ be the component space in $\mathbb{A}$. Then can see $\mathbb{A} \times \mathbb{A} \tilde{=} \prod X_\alpha \times X_\alpha$. 
+Now, since addition and multiplication are continuous in all the component spaces (as maps from $X_\alpha \times X_\alpha$ to $X_\alpha$), they (applied elementwise) must be continuous in $\mathbb{A}$ by Lemma 3. 
+\end{proof}
+\end{document}

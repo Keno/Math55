@@ -1,0 +1,129 @@
+\include{prelude}
+\section*{Problem 1 a)}
+\begin{mydef}
+A symmetric subset $H$ of a group $G$ is a subset that $e\in H$ and if $g\in H$, $g^{-1}$.
+\end{mydef}
+\begin{notation}
+For a subset $H$ of some group $G$, we shall write $H^{-1}=\{ g^{-1} | g\in H \}$. Note that for topological groups $H^{-1}$ is open/closed if and only if $H$ is open/closed since inversion is a continuous map on topological groups by definition.
+\end{notation}
+\begin{lemma}
+For all surjective functions $F: X\to Y$ and all $X\subset Y$ we have $F(F^{-1}(A)) = A$
+\begin{proof}
+Let $x\in A$. Since $F$ is surjective, there exists $y\in X$ such that $F(y)=x$. Then $F(F^{-1})=\cup_{y\in F^{-1}(A)} F(y) = \cup_{x\in A} \{x\} = A$.
+\end{proof}
+\end{lemma} 
+\begin{lemma}
+Let $G$ be a topological group (not necessarily $T_0$) and let $U$ be a neighborhood around $e$ (not necessarily open) . Then there exists an open symmetric neighborhood $V$ of $e$ such that $VV\subseteq U$.
+\begin{proof}
+\begin{lemma}
+A $T_0$ topological group is $T_1$.
+\begin{proof}
+A group $G$ is $T_1$ is and only if $\{x\} = cl(\{x\})$ for all $x\in G$. However, since $x=xe$, $\{x\} = x\{e\} = xcl(\{e\})$ so all wee need to show is that $\{e\} = cl(\{e\})$. For all $x\in G$ We know that there must either exists an open neighborhood $N_e$ of $e$ that does not contain $x$ or an open neighborhood $N_x$ of $x$ that does not contain $e$. So either $x\notin xN_x$  (note that we use the fact that multiplication is continuous in this case) or $x\notin N_e$. Thus in either case we must have $x\notin cl(\{x\})$ and thus we must have $\{x\}=cl(\{x\})$ and thus $G$ is $T_1$. 
+\end{proof}
+\end{lemma}
+Let $F: G\times G \to G$ be the multiplication map and let $U'$ denote the interior of $U$. Then, since $F$ is continuous by the definition of topological group, $F^{-1}(U')=V_1\times V_2$ must be an open set in $G\times G$ and thus $V_1$ and $V_2$ must be open sets in $G$, both containing $e$ (since $U$ contains $e$ and $ee=e$). Furthermore we must have $V1V2=U'\subseteq U$ Now, let $V_3 = V_1\cap V_2$. Since $V_3\subseteq V_1$ and $V_3\subseteq V_2$, we must have $V_3V_3\subseteq U$ and since $V_1$ and $V_2$ are open and the intersection is finite we must have $V_3$ open (and non-empty since it at least contains $e$). Now let $V=V_3\cap V_3^{-1}$. For the same reasons as for $V_3$ note that $V$ is an open neighborhood of $e$. Furthermore, we must have that if $g\in V$, $g^{-1} \in V$ so $V$ must be symmetric as desired.
+\end{proof}
+\end{lemma}
+\begin{proof}[Proof of the problem] 
+Let $G$ be a $T_0$ topological group and let $a,b\in G$. Consider the two point $e$ and $b^{-1}a$. Now, since $G$ is $T_1$, we may find an open neighborhood $U$ of $e$ such that that $b^{-1}a\notin U$. Then by the above lemma, we may find an open, symmetric neighborhood $V$ around $U$ such that $VV\subset U$. Now consider the sets $aV$ and $bV$ which are open neighborhoods of $a$ and $b$ respectively. We must have $aV\cap bV = \emptyset$ for otherwise there would exist $v_1,v_2\in V$ such that $a v_1 = b v_2$ which would imply that
+\[ b^{-1} a = v_2 v_1^{-1} \in VV^{-1} = VV \subseteq U \]
+which is not possible by the construction of $U$. Thus $G$ is Hausdorff.
+\end{proof}
+\section*{Problem 1 b)}
+\begin{proof}
+To show that $\mathcal{T}_z$ is a topology, we need to show
+\begin{enumerate}
+\item $Z$ and $\emptyset$ are both open (and thus both closed)
+\begin{proof}
+We have $F^{-1}(\emptyset) = \emptyset$ and $F^{-1}(\emptyset)(Z)=Y$ (since $F$ is defined for all of $Y$) which must both be open in $Y$ (since $Y$ is a topological space) and thus $\emptyset$ and $Z$ must be open in the topology given by $\mathcal{T}_z$
+\end{proof}
+\item Arbitrary unions of open sets and finite intersections of open sets are open
+\begin{proof}
+From a previous problem set, we know that $F^{-1}(\cup_{i\in I} A_i) = \cup_{i\in I} F^{-1}(A_i)$ and $F^{-1}(\cap_{i\in I} A_i) = \cap_{i\in I} F^{-1}(A_i)$. Thus arbitrary unions and finite intersections of sets in $\mathcal{T}_z$ are open under $F^{-1}$ (since the sets in the unions on the RHS are open by the definition of  $\mathcal{T}_z$)  as $Y$ is a topology and thus they are in $\mathcal{T}_z$.
+\end{proof}
+\end{enumerate}
+Therefore $(Z,\mathcal{T}_z)$ is a topology and $F$ is continuous by construction of $\mathcal{T}_z$.
+Now, if $(Z,\mathcal{T}_z)$ is $T_1$, let $z\in Z$, then for every $x\in Z-\{z\}$ there must exist and open neighborhood $U_x$ of $x$ not containing $z$. Then we must have 
+\[ \bigcup_{x\in Z-{z}} U_x = Z-\{z\} \]
+be an open set and thus ${z}$ must be closed, implying that $F^{-1}(\{z\})$ must be closed by continuity of $F$.  \par
+Conversely, if $F^{-1}(\{z\})$ is closed, then $Y-F^{-1}(\{z\})=F^{-1}(Z-{z})$ must be open and thus $\{z\}$ is closed for all $z\in Z$, for any $x,y \in X$, $Z-{x}$ must be open neighborhood of $y$ not containing $x$ and $Z-{y}$ must be an open neighborhood of $x$ not containing $y$ and thus  $(Z,\mathcal{T}_z)$ must be $T_1$.
+\end{proof}
+\section*{Problem 1c)}
+\begin{lemma}
+Let $G$ be a group, and let $H$ be a subgroup. For any $a,b\in G$, $aH\cap bH \neq \emptyset$ if and only if $aH=bH$. 
+\begin{proof}
+The if direction is trivial since $aH\cap bH = aH =bH \neq \emptyset$. For the other direction, let $c\in aH\cap bH$, $c = ah_1$ and $c=bh_2$ for some $h_1,h_2\in H$. Now, $a=bh_2h_1^{-1}$, so $aH = (bh_2h_1^{-1})H = b(h_2h_1^{-1}H) = bH$. 
+\end{proof}
+\end{lemma}
+Consider the function $\mu_g: G\to G$, $\mu_g(a)=ga$, Note that we may write this as $\mu_g=(P_2^{-1} \circ \cdot)$ and since both $\cdot$ and $P_2^{-1}$ are continuous (the former by definition, the latter since projection is an open map) and since the composition of continuous functions is continuous, $\mu_g$ must be continuous. Furthermore note that $\mu_g$ is also an open map (and a closed map) since $(\mu_g)^{-1} = \mu_{g^{-1}}$ which must be continuous. Now, let $H$ be an open subgroup. Note that $gH=\mu_g(H)$ must be open and thus every coset of $H$ must be open.
+consider $gH$ for $g\notin H$, since $g\in gH$, we cannot have $gH = H$ and thus we must have $eH\cap gH = H\cap gH = \emptyset$. Thus 
+\[ \bigcup_{x\in G-H} xH = G-H \]
+and $G-H$ must be an open set and thus $H$ must be closed as desired. 
+\section*{Problem 1d)}
+Let $G$ be a topological group and let $H\subset G$ be a closed subgroup. Now, we may equip $G/H$ with the quotient topology by letting the function $F$ in the definition of the quotient topology be given by $F(g) = gH$. Now, to show that $gH$ is a $T_1$ space it suffices to show that $F^{-1}(\{gH\})=gH$ is closed for all $g\in G$. However, we know from 1c) that all cosets of closed subgroups are closed (this follow from the fact that $\mu_g$ is a closed map) and thus we must have $G/H$ be $T_1$.\par
+Now, the natural action of $G$ on $G/H$ is $\alpha: G\times G/H \to  G/H$, where $\alpha(g_1,gH) = g_1gH = (g_1g)H$. Now suppose we have some open set $A\subset G/H$. Then the inverse image of $A$ under essentially elements $(g_1,g_2)\in G\times G$ such that $g_1g_2H = A$. Taking the inverse image of the projection on both sides, we see that this simply translates to continuity as a multiplication on $G$ which is continuous by definition.
+\section*{Problem 1e)}
+\begin{lemma}
+Given any neighborhood $U$ of the identity, there exist an open neighborhood $V$ of the identity such that for any $g\in G$, $gVg^{-1} \subset U$.
+\begin{proof}
+Consider $VV$ from problem 1a). Then for all $v_1v_2\in VV$.
+Now
+\[ (gv_1v_2)^{-1} = v_2^{-1}v_1^{-1}g^{-1} \in V^{-1}V^{-1}g^{-1} = VVg^{-1} \]
+Thus we must have $VVg^{-1}  \subset gVV$, but by the same argument, we must also have $gVV  \subset  VVg^{-1}$ and thus we must have $gVV = VVg^{-1}$, which implies that $gVVg^{-1}=VV\subset U$ as desired.
+\end{proof}
+\end{lemma}
+\begin{proof}[Proof of the problem]
+Let $g_1H$, $g_2H$, be two sets in $G/H$ and let $U$ be any neighborhood of the identity such that. Now consider any open neighborhood $A$ around $eH$ such that $g_1H\notin A$, $g_2H\notin A$. Then $F^{-1}(A)$ will be an open neighborhood of the identity in $G$ and there must exist an open neighborhood $V$ of $e$ such that $gVg^{-1}\subset U$ for all $g\in G$. Now $g_1A$ is a neighborhood of $g_1H$ and $F^{-1}(g_1A) = g_1F^{-1}(A)$ which must be open and thus $g_1A$ must be open. Similarly, $g_2A$ must be open. Now, 
+\[ g_1A\cap g_2A = \emptyset \iff F^{-1}(g_1A\cap g_2A ) = \emptyset \iff F^{-1}(g_1A) \cap F^{-1}(g_2A) = \emptyset \]
+Assume this were not the case. Then for some $u_1,u_2\in V$,
+$g_1u_1 = g_2u_2 \so g_2^{-1}g_2 = u_2u_1^{-1} \in V$. However, this would imply that $g_1H\in A$ which is not the case by construction of $A$ and thus $G/H$ must be Hausdorff.
+\end{proof}
+\section*{Problem 1f)}
+Since $H$ is a normal subgroup of $G$, there exists a unique group structure on $G/H$ and there exists a homomorphism $p: G\to H$. Multiplication on this group is then defined as follows: $g_1H, g_2H \in G/H$, $(g_1H)(g_2H) = g_1g_2H$ and inverse as $(g_1H)^{-1} = g^{-1}H$. The continuity of the inverse on $G/H$ follows almost immediately: A set in $G/H$ is open if the inverse image under $p$ is open. However, we know by the continuity of the inverse on $G$ that $p^{-1}(g^{-1}H)$ must be open if $p(g^{-1}H)$ is open and thus the inverse must be continuous on $G/H$. We also need to show that multiplication is continuous as a map from $G/H\times G/H$ to $G/H$. For that purpose consider an open set in $A=G/H$ given by $\{gH | g\in B\}$ then the inverse image under multiplication is given by $C=\{(g_1H,g_2H) | g_1H,g_2H \in G/H, g_1g_2H = gH, gH\in A\}$. Now, we must show that this is the product of two open sets in $G/H$. For that purpose, let $D=P_1(C)$, $E=P_2(C)$. Then $E=\cup_{g_2H\in D} \{ g^{-1}g^2{-1}H | gH \in A \}$ which must be a union of open set and the same can be done for $D$ and thus they both must be open sets, proving that multiplication is continuous.
+\section*{Problem 1g)}
+Recall that the closure of $\{e\}$ is the intersections of all closed sets that contain $e$, or equivalently the complement of the union over all open sets that do not. Now assume that $H=cl(\{e\})$ is not normal. Then we have $gxg^{-1}\notin cl(\{e\})$ for some $g\in G$, $x\in cl(\{e\})$, so $gxg^{-1} \in A$ or $x \in g^{-1}Ag$ for some open set $A$ that does not contain $e$.  However, $g^{-1}Ag$ is just another open set that does not contain $e$ and thus we get a contradiction (since $X$ is simultaneously in $g^{-1}Ag$ and not in $g^{-1}Ag$, since $g^{-1}Ag$ is an open set no containing the identity). \par
+From 1d) we know that $G/H$ is $T_1$ (and thus $T_0$) and from 1f) we know that $G/H$ is a topological group. Thus by 1a) $G/H$ must be Hausdorff.
+\section*{Problem 1h)}
+Consider the set of invertible $2\times 2$ matrices with real entries $GL(2,\R)$. We want to show that, when equipped with the restricted topology from $\R^4$, $GL(2,\R)$ is a topological group. First note that $GL(2,\R)$ forms a group under matrix multiplication (the multiplicative identity is the identity matrix, inverses are given by matrix inverses, and the product continues two invertible matrices will again be an invertible matrix since the determinant of the product matrix is the product of the determinants, neither of which is zero). \par 
+Let us first prove that the inverse is continuous as a map $GL(2,\R) \to GL(2,\R)$. Since we are considering the restricted topology, we can consider open sets in the topological group to be matrices of open intervals in $\R$. There exists a simple formula to compute the inverse of a $2\times 2$ matrix that relies on multiplication, addition in $\R$ and reciprocation in $R-\{0\}$ (since the determinant is nonzero) given by the following: 
+\[ A^{-1} = \left(\begin{bmatrix}
+ a & b \\ c & d
+\end{bmatrix}\right)^{-1} = \frac{1}{ad-bc}\begin{bmatrix}
+d & -b \\ -c & a
+\end{bmatrix} \]
+
+We have previously proven that all these operations are continuous on the standard topology for $\R$ and we have also proven that the composition and product of continuous functions will lead to a continuous  function and thus matrix inversion as a map from $\R^4 \to \R^4$ must be continuous. \par
+Matrix multiplication can be seen as a map from $\R^4 \times \R^4 \simeq \R^8 \to R^4$ that is the composition of multiplication and addition of elements in each of the components spaces. We have proven that such a function is continuous on a previous problem set (as maps from $R^4\to R^2$, but that same argument can be applied twice to obtain the arguments for $\R^8 \simeq (\R^4)^2 \to (\R^2)^2 \simeq \R^4$ - in fact such an argument is easy to make since the $\R^n$ are metric spaces and we may thus say that any map from $R^n\to R$ that solely depends on addition and multiplication must be continuous by the $\epsilon-\delta$ definition).
+Thus $GL(2,\R)$ is a topological group. \par
+Now note that $SL(2,\R)$ is an open subgroup of $GL(2,\R)$ and must thus necessarily be a topological group by the restricted topology of $GL(2,\R)$ (which happens to also be the restricted topology from $\R^4$).
+\section*{Problem 2}
+We want to find an isomerism between $SL(2,\Z /2 \Z)$ and the permutation group on $3$ letters. First note that it should be intuitively clear that we should be able to do so as $\#S_3=3!=6$ and we need to require that
+\[ \begin{bmatrix}
+a &b \\ c&  d
+\end{bmatrix} \]
+$ad - bc \equiv 1 \mod{2}$
+We clearly see that for this we must have either $ad=1 \text{xor} bc=1$ and thus we have $\#SL(2,\Z /2 \Z)=2^4-2^3-2 =6$ where the first number corresponds to the total number of all matrices with arbitrary determinant, the second to those where three of $\{a,b,c,d\}$ are zero (and thus the determinant is zero) and the third, where all four are one. \par
+There are many possible isomorphisms, but this is one of them (where we write $(ijk)$ for the permutation that maps $\sigma(1)=i$, $\sigma(2)=j$, $\sigma(3)=k$. 
+\begin{align*}
+ A=\begin{bmatrix}
+1 & 0\\ 0 &  1 
+\end{bmatrix} \Leftrightarrow (123)  \qquad &
+B=\begin{bmatrix}
+1 & 1\\ 0 &  1
+\end{bmatrix}  \Leftrightarrow (213) &
+C=\begin{bmatrix}
+1 & 0\\ 1 &  1 
+\end{bmatrix} \Leftrightarrow (132) &\\
+D=\begin{bmatrix} 
+0 & 1\\ 1 &  0
+\end{bmatrix} \Leftrightarrow (321)  \qquad &
+E=\begin{bmatrix}
+1 & 1\\ 1 &  0 
+\end{bmatrix} \Leftrightarrow (231) &
+F=\begin{bmatrix}
+0 & 1\\ 1 &  1
+\end{bmatrix}  \Leftrightarrow (312)  &
+\end{align*}
+thus we have a bijective map. TO show that this map is an isomorphism, we need to show that it is bijective.
+First note that $A$ is the identity in both groups and that $B,C$ and $D$ are their own inverses (and the corresponding permutations are their own inverses since they are in essence just a transposition). Furthermore, we have $EF=FE=A$ and the same holds true for the associated permutations. Therefore we have $p(X^{-1}) = p(X)^{-1}$ and $p(e) = e$. Thus for any $p(XY)$. Note that $F=B*C$ and $E=C*B$ (this is also true for the associated permutations, since the permutations associated with $E$ and $F$ are just the composition of two transposition). Thus we may write all matrices as product of $B,C,D$ which correspond to the transpositions in the symmetry group and thus the map must be an isomorphism.
+\end{document}
